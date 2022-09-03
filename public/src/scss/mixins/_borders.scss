@@ -1,0 +1,6 @@
+@mixin borderSize($size, $type, $color) {
+    border: calculateRem($size) $type $color;
+}
+
+    
+}

@@ -1,3 +1,4 @@
+
 /*!
  Reset
  */
@@ -5,6 +6,7 @@
 *::before,
 *::after {
     box-sizing: border-box;
+    
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -46,6 +48,7 @@ h1 {
     margin-bottom: 0.5rem;
     font-weight: 500;
     line-height: 1.2;
+    font-family: map-get($fonts, 'raleway' );
 }
 
 h1 {
@@ -179,7 +182,7 @@ sup {
 }
 
 a {
-    color: #0d6efd;
+    color: map-get($colors, 'blue');
     text-decoration: underline;
 }
 
@@ -221,7 +224,7 @@ pre code {
 
 code {
     font-size: 0.875em;
-    color: #d63384;
+    color: map-get($colors, 'red');
     word-wrap: break-word;
 }
 
