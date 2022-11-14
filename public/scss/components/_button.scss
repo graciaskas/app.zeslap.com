@@ -1,0 +1,69 @@
+.btn,.btn-sm,.btn-close {
+    &:focus {
+        overflow: hidden;
+        outline: none;
+        border: none;
+        box-shadow: none;
+    }
+}
+.btn-group  {
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: normal !important;
+    a.dropdown-toggle, a.btn {
+        font-family: 'Montserrat', sans-serif !important;
+        font-weight: normal !important;
+    }
+    .btn {
+        height: 41px !important;
+    }
+}
+
+.btn-sm {
+    padding: .35rem .85rem !important;;
+    border-radius: 0.15rem;
+}
+
+.bg-primary[role=button]{
+    &:active {
+        background-color: mix(black, map-get($colors, 'primary'), 15) !important;
+    }
+}
+
+.btn {
+    // padding: 0.7rem 1.2rem !important;
+    // padding: 0.65em 0.938em !important;
+    padding: 0.6rem 0.9rem !important;
+    border-radius: 0.15rem !important;
+
+    &.bg-primary {
+        color: white !important;
+        span, i{
+            color: var(--white) !important;
+        }
+        &:active {
+            background-color: mix(black, map-get($colors, 'primary'), 15) !important;
+        }
+    }
+
+    &.bg-secondary, 
+    &.bg-danger,
+    &.bg-success {
+        color: white !important;
+        span,i {
+            color: var(--white) !important;
+        }
+        &:active {
+            background-color: mix(white, map-get($colors, 'secondary'), 15) !important;
+        }
+    }
+
+    &.button-loader {
+        position: relative;
+        i {
+            position: absolute;
+            top: 5px;
+            left: 7px;
+            font-size: 25px;
+        }
+    }
+}

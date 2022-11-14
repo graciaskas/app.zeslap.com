@@ -1,0 +1,180 @@
+@font-face {
+    font-family: 'Raleway';
+    src: url(../fonts/ExtraBold.ttf);
+}
+
+// @font-face {
+//     font-family: 'Lato';
+//     src: url(../fonts/Lato-Regular.ttf);
+// }
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@700;800;900&display=swap');
+
+:root {
+    /** Break points **/
+    --sm: 600px;
+    --md: 768px;
+    --lg: 1024px;
+    --xl: 1200px;
+    --xxl: 1400px;
+}
+
+/*** 1. RESET ***/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap');
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    line-height: 1.5em;
+}
+
+::selection {
+    &:not(div#itextInput) {
+        user-select: none;
+    }
+}
+
+:root {
+    @each $color,$value in $colors {
+        #{'--'}#{$color} : #{$value},
+    }
+}
+
+html {
+    scroll-behavior: smooth;
+    &:not(div#itextInput){
+        user-select: none;
+    }
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    min-width: 397px !important;
+    font-family: "Montserrat", 'Segoe UI',sans-serif;
+    color: map-get($colors, 'secondary');
+    font-size: 1rem;
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+button {
+    font-family: "Raleway", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+}
+
+h1 {
+    font-size: 2.35em;
+}
+
+h2 {
+    font-size: 2em;
+}
+
+h3 {
+    font-size: 1.688em;
+}
+
+h4 {
+    font-size: 1.375em;
+}
+
+h5 {
+    font-size: 1.1em;
+}
+
+@media(max-width:768px) {
+    h1 {
+        font-size: 25px !important;
+    }
+
+    h2 {
+        font-size: 22px !important;
+    }
+
+    h3 {
+        font-size: 20px !important;
+    }
+
+    h4 {
+        font-size: 20px !important;
+    }
+}
+
+
+ul { 
+    padding: 0 !important;;
+}
+
+a {
+    text-decoration: none;
+    color: map-get($colors, 'primary');
+    &:hover {
+        color: map-get($colors, 'primary');;
+    }
+    &.btn {
+        font-family: 'Raleway',system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+}
+
+a:not(.btn) {
+    font-weight: normal !important;
+}
+
+a:visited {
+    background-color: transparent;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    pointer-events: none;
+}
+
+
+input:not([type=radio],[type=checkbox]),
+button,select:not(.form-control-sm), textarea {
+    padding: 0.6rem 0.9rem !important;
+    border: 1px solid transparent !important;
+    border-radius: 0.15em !important;;
+    outline: none;
+}
+
+
+select {
+    outline: none;
+    // border: none;
+    option {
+        padding: 5px !important;
+    }
+}
+
+textarea:focus,
+input:focus {
+    outline: 2px solid var(--blue);
+}
+
+input[type=color] {
+    appearance: none !important;;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 2% !important;
+    border: none;
+    border-radius: 5% !important;
+    
+}
+
+input[type=color]::-webkit-color-swatch {
+    border-radius: 5% !important;
+}
+
+textarea {
+    resize: none;
+    font-family: "Raleway";
+}

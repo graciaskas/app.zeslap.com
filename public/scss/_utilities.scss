@@ -1,0 +1,276 @@
+/*
+    Copyright ZeSlap Incorporation
+    This scss file a writen and maintained by zeslap inc. 
+*/
+@use "sass:math";
+.toast {
+    box-shadow: none;
+    border: none;
+
+    .toast-header {
+        background-color: inherit;
+
+        .badge {
+            margin-right: 5px;
+
+            i {
+                font-size: .7rem;
+                // color: var(--secondary);
+            }
+        }
+    }
+
+    .btn-close {
+        box-shadow: none;
+    }
+}
+
+
+/*! Active elements*/
+.active-menu {
+    background-color: map-get($colors, 'blueo');
+    border-left: 5px solid map-get($colors, 'blue');
+}
+
+/*** Box shadows ****/
+.shadow-default {
+    box-shadow: 0 2px 3px 0 rgb(0 0 0 / 10%), 0 0 0 1px rgb(0 0 0 / 2%);
+}
+
+.shadow-none{
+    box-shadow: none !important;
+    overflow: hidden !important;
+    outline: none !important;
+}
+
+
+/*** Hover effect colors ****/
+@each $color,$value in $colors {
+    .hv-b#{$color}:hover {
+        background-color: $value !important;
+    }
+    .hv-t#{$color}:hover {
+        color: $value !important;
+    }
+}
+
+
+/*** Active effect colors ****/
+@each $color,$value in $colors {
+    .act-b#{$color}:active {
+        background-color: $value !important;
+    }
+    .act-t#{$color}:active {
+        color: $value !important;
+    }
+}
+
+
+/*** focus effect colors ****/
+@each $color,$value in $colors {
+    .foc-b#{$color}:focus {
+        background-color: $value !important;
+    }
+    .foc-t#{$color}:focus {
+        color: $value !important;
+    }
+}
+
+/** TEXT font family **/
+.text-raleway {
+    font-family: 'Raleway','Poppins',sans-serif;
+}
+.text-montserrat {
+    font-family: "Montserrat", Segoe UI, sans-serif;
+}
+
+
+/** TEXT COLOR **/
+@each $color,$value in $colors {
+    .text-#{$color} {
+        color: $value  !important;
+    }
+    @for $i from 1 to 10 { 
+        /** Text color light variations **/
+        .text-#{$color}-light-#{$i} {
+            color: mix(white, $value, $i * 10) !important;
+        }
+    }
+    @for $i from 1 to 10 {
+        /** Text color dark variations **/
+        .text-#{$color}-dark-#{$i} {
+            color: mix(black, $value, $i * 10) !important;
+        }
+    }
+}
+
+
+/** BACKGROUND COLOR **/
+@each $color,$value in $colors {
+    .bg-#{$color} {
+        background-color: $value !important;
+    }
+
+    @for $i from 1 to 10 {
+        /** Background color light variations **/
+        .bg-#{$color}-light-#{$i} {
+            background-color: mix(white, $value, $i * 10) !important;
+        }
+    }
+
+    @for $i from 1 to 10 {
+        /** Background color dark variations **/
+        .bg-#{$color}-dark-#{$i} {
+            background-color: mix(black, $value, $i * 10) !important;
+        }
+    }
+}
+
+
+/* Badges */
+.badge {
+    font-family: 'Raleway';
+}
+
+/* Borders */
+.border {
+    border: 1px solid #dfdfdf !important;
+}
+.border-bottom {
+    border-bottom: 1px solid #dfdfdf !important;
+}
+.border-right {
+    border-right: 1px solid #dfdfdf !important;
+}
+
+.border-left {
+    border-left: 1px solid #dfdfdf !important;
+    @each $color,$value in $colors {
+        &.border-#{$color} {
+            border-left: 1px solid $value !important;;
+        }
+    }
+}
+
+@each $color,$value in $colors {
+    .bs-#{$color}-1 {
+        border: 1px solid map-get($colors, #{$color}) !important;
+    }
+    .bs-#{$color}-2 {
+        border: 2px solid map-get($colors, #{$color})  !important;
+    }
+    .bd-#{$color}-1 {
+        border: 1px dotted map-get($colors, #{$color}) !important;
+    }
+    .bd-#{$color}-2 {
+        border: 2px dotted map-get($colors, #{$color}) !important;
+    }
+}
+
+
+.icon_round {
+    padding-top: 7px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    height: 30px;
+    width: 30px;
+    margin-right:  7px;
+    &.last {
+        margin-right: 0;
+    }
+    i {
+        font-size: 20px;
+       
+    }
+}
+
+/** Radius **/
+.icon_round { 
+    border-radius: 100%;
+    width: 35px;
+    height: 35px;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bolder;
+}
+
+
+.btn-sm {
+    padding: 0.35rem 0.8rem;
+    border: transparent;
+    text-align: center !important;
+    cursor: pointer;
+    border-radius:0.3rem;
+}
+
+.btn-scroll { 
+    position: absolute;
+    bottom: 20px;
+    right: 35px;
+}
+
+.btn-item { 
+    position: absolute;
+    bottom: 70px;
+    right: 15px;
+}
+
+.btn-nav {
+    padding: 7px !important;
+    width: 45px;
+    cursor: pointer;
+    /* height: 50px; */
+}
+.btn-nav div {
+    width: 100%;
+    border-radius: 5px;
+    height: 3px;
+    background: var(--blue);
+    margin-bottom: 5px;
+}
+
+/** Toggle **/
+.toggle { 
+    min-width: 20rem;
+}
+
+.toggle a{ 
+    display: flex;
+    align-items: center;
+    font-family: 'San Francisco' !important;
+    font-size: 0.9rem !important;
+    padding: 0.7rem 1.2rem;
+    border-bottom: 1px solid #efefef;
+}
+
+.toggle a span{ 
+   margin-right: 0.3rem;
+   font-weight: bold;
+}
+
+
+.toggle-scroll { 
+    position: absolute;
+    bottom: 70px;
+    right: 35px;
+    background-color: var(--white);
+}
+
+/** Animations **/
+.rotate {
+    animation: rotate .3s  infinite;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(-45deg);
+    }
+
+    100% {
+        transform: rotate(46deg);
+    }
+}
