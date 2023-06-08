@@ -58,10 +58,10 @@ const data = [
 
 export default function Dashboard() {
   return (
-    <div className="container">
+    <div className="container-lg">
         <div className="row">
               
-            <div className="col-lg-4 col-md-6 col-12">
+            <div className="col-lg-4 col-md-6 col-sm-6 col-12">
                 <div className="border-bottom bg-white shadow-default rounded mb-3">
                     <div className="modal-header">
                         <h5>Subscriptions</h5>
@@ -89,7 +89,7 @@ export default function Dashboard() {
                 </div>
             </div>
               
-            <div className="col-lg-4 col-md-6 col-12">
+            <div className="col-lg-4 col-md-6 col-sm-6 col-12">
                 <div className="border-bottom bg-white shadow-default rounded mb-3">
                     <div className="modal-header">
                         <h5>Subscriptions</h5>

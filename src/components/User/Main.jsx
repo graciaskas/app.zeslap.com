@@ -17,15 +17,12 @@ export default function Main() {
     //States variables
     const [ users, setUsers ] = useState([]);
     const [ error, setError ] = useState(null);
-    const { setLoading } = useContext(GlobalContext);
+    const { setLoading, BASE_URI } = useContext(GlobalContext);
 
     //Seach params => Trying to get view paramater from current location;
     const params = new URLSearchParams(window.location.search);
     const viewType = params.get('view') || 'th';
   
-    //Destructure context values
-    const { BASE_URI } = useContext(GlobalContext);
-
     //Table view type columns to display
     const fields = [
         { name: 'username', title: "Name" },
