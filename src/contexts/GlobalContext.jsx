@@ -1,59 +1,51 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams, useSearchParams } from "react-router-dom";
+import { userLocal, userServer } from "../utils/utils";
 
 const BASE_URI = navigator.onLine
 	? "https://api.zeslap.com/v1"
 	: "http://localhost:8081/v1";
 
-const API_URL = navigator.onLine
-	? "https://api.zeslap.com/v1/users/?profile=1"
-	: "http://localhost:8081/v1/users/?profile=1";
-
 export const GlobalContext = React.createContext();
 
 export default function GlobalProvider({ children }) {
 	const [loading, setIsLoading] = useState(false);
-	let [user, setUser] = useState({});
-	var token = "odoo";
+	const [notify, setNotify] = useState(false);
 
-	useEffect(() => {
-		withUser(client);
-	}, []);
+	const [error, setError] = useState({
+		title: "Something went wrong",
+		content: "Bla bla",
+		type: "danger",
+	});
 
-	let client = localStorage.getItem("zeslap-user");
+	const token = userLocal()?.token;
+	const params = useSearchParams()[0];
 
 	//Custom setState function to manage loading state variable
 	const setLoading = (value) => setTimeout(setIsLoading(value), 500);
 
-	const withUser = async (client) => {
-		if (!client) throw Error("Arguments missing error: no user passed");
-		setLoading(true);
-		try {
-			client = JSON.parse(client);
-
-			token = client["z_key"];
-
-			let response = await fetch(API_URL, {
-				method: "GET",
-				headers: { authorization: "Bearer " + client["z_key"] },
-			});
-			setLoading(false);
-			let result = await response.json();
-			setUser(result);
-		} catch (error) {
-			console.error(error);
-		}
+	const getBase64 = (file) => {
+		return new Promise((resolve, reject) => {
+			const reader = new FileReader();
+			reader.readAsDataURL(file);
+			reader.onload = () => resolve(reader.result);
+			reader.onerror = (e) => reject(e);
+		});
 	};
 
 	//Context shared values
 	const values = {
 		BASE_URI,
 		loading,
+		getBase64,
 		setLoading,
-		withUser,
-		user,
-		setUser,
-		client,
+
+		error,
+		setError,
+
+		setNotify,
+		notify,
+		params,
 		headers: {
 			authorization: "Bearer " + token,
 		},
