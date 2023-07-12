@@ -22,7 +22,7 @@ export default function Create() {
 	//state
 	const [state, setState] = useState({
 		title: null,
-		category: null,
+		category_id: null,
 		content: null,
 		cover: null,
 	});
@@ -36,16 +36,21 @@ export default function Create() {
 
 		setState({
 			...state,
-
 			content: writingAreaRef.current.innerHTML,
 		});
 
-		if (state.title === null || !state.category) {
+		if (
+			state.title === null ||
+			state.category_id === null ||
+			state.content === null
+		) {
+			setNotify(true);
 			setError({
 				title: "Form validation error",
 				content: "Please some required field are empty",
 				type: "danger",
 			});
+			setLoading(false);
 			return;
 		}
 
@@ -63,7 +68,6 @@ export default function Create() {
 			setLoading(false);
 			const json = await response.json();
 
-			setNotify(true);
 			setError({ ...error, content: json.message });
 
 			if (response.status === 200) {
@@ -126,10 +130,6 @@ export default function Create() {
 			reader.onerror = (error) => reject(error);
 		});
 	}
-
-	useEffect(() => {
-		console.log(state);
-	}, [state]);
 
 	return (
 		<div className="container-lg">
