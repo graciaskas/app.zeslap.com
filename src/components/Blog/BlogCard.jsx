@@ -1,9 +1,11 @@
-import React, { useRef } from "react";
-import { useEffect } from "react";
+import React, { useRef, useContext } from "react";
+
 import { Link } from "react-router-dom";
+import { GlobalContext } from "../../contexts/GlobalContext";
 
 export default function BlogCard(props) {
 	const postContentRef = useRef(null);
+	const { SITE_URL } = useContext(GlobalContext);
 
 	let author = "Gracias Kasongo";
 	let post;
@@ -16,8 +18,8 @@ export default function BlogCard(props) {
 
 	return (
 		<Link
-			to={"/blog/view?q=" + post.id}
-			className="border rounded p-4  bg-white mb-3 d-block text-secondary">
+			to={"/blog/view?blog=" + post._id}
+			className="shadow-default rounded p-2   bg-white mb-3 d-block text-secondary">
 			<div className="d-flex border-bottom pb-2 position-relative">
 				<img
 					src="/img/_q.jpg"
@@ -30,34 +32,40 @@ export default function BlogCard(props) {
 					<small
 						className="d-block text-montserrat"
 						style={{ fontSize: ".8rem", marginTop: "-2px" }}>
-						<i className="fa fa-calendar-alt" /> 12/12/2022
+						<i className="fa fa-calendar-alt" />{" "}
+						{new Date(post.create_date).toLocaleString()}
 					</small>
 				</div>
-				<small className="bg-primary-light-7 px-2 rounded-pill position-absolute top-0 end-0">
+				<small className="bg-primary text-white px-2 rounded-pill position-absolute top-0 end-0">
 					Posted
 				</small>
 			</div>
 
 			<div className="py-3">
-				<strong>{post.title && post.title.substring(0, 110) + "..."}</strong>
+				<div style={{ height: 150, overflow: "hidden" }}>
+					<img src={`${SITE_URL}/src/${post.cover}`} alt="dds" />
+				</div>
+				<h5 className="my-2">
+					{post.title && post.title.substring(0, 110) + "..."}
+				</h5>
 
 				<div className="mt-2">
 					<i className="fa fa-clipboard-list" style={{ marginRight: "7px" }} />
-					Business expertise | Accounting
+					{post.category_id[1]}
 				</div>
 			</div>
 
 			<div className="d-flex align-items-center  border-top pt-2">
 				<div className="d-flex align-items-center">
-					<span className="fa fa-heart text-primary"></span>
+					<span className="fa fa-heart text-white bg-primary rounded-pill px-1"></span>
 					<small className="text-montserrat" style={{ marginLeft: "5px" }}>
-						0 Like(s){" "}
+						{post.likes} Like(s)
 					</small>
 				</div>
 				<div style={{ marginLeft: "15px" }}>
 					<i className="fa fa-comments" />
 					<small className="text-montserrat" style={{ marginLeft: "5px" }}>
-						0 Comment(s){" "}
+						{post.comments} Comment(s)
 					</small>
 				</div>
 			</div>

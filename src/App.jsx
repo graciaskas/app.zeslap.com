@@ -9,6 +9,8 @@ import NewsLetter from "./components/NewsLetter";
 import Subscription from "./components/Subscription";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
+import Category from "./components/Categories";
+import Comment from "./components/Comment";
 
 import {
 	Link,
@@ -21,46 +23,62 @@ import {
 import "./css/bootstrap.min.css";
 import "./css/all.min.css";
 import "./css/main.min.css";
+// import "./scss/style.scss";
 
 import Header from "./components/Header";
 import Loader from "./components/Loader";
 import { useContext } from "react";
 import { GlobalContext } from "./contexts/GlobalContext";
 
-import { useParameters } from "./hooks/hooks";
 import LogOut from "./components/LogOut";
-import authenticateUser from "./utils/utils";
 
-const API_URL = navigator.onLine
-	? "https://api.zeslap.com/v1/users/?profile=1"
-	: "http://localhost:8081/v1/users/?profile=1";
-
-const destUrl = navigator.onLine
-	? "https://zeslap.com/login"
-	: "http://localhost:8082/login";
+import Payment from "./components/Payment";
+import Plan from "./components/Plan";
+import { AuthContext } from "./contexts/AuthContext";
+import Toast from "./components/Toast";
 
 export default function App() {
-	authenticateUser();
+	const { user } = useContext(AuthContext);
+	const { loading, toast, log } = useContext(GlobalContext);
+	const { title, type, content } = toast;
 
-	const { loading, client } = useContext(GlobalContext);
+	useEffect(() => {
+		console.log(user);
+	}, [user]);
 
 	return (
 		<div className="App">
-			<Navigation />
+			<Navigation user={user} />
 
 			{loading ? <Loader /> : null}
 
 			<main className="main">
-				<Header />
+				<Header user={user} />
+				{log ? <Toast title={title} type={type} content={content} /> : null}
+
 				<div className="main-content">
 					<Routes>
 						<Route path="/" element={<Dashboard />} />
-						<Route path="/blog/*" element={<Blog />} />
+						{user &&
+							(user.role === "admin" || (user && user.role === "author")) && (
+								<>
+									<Route path="/blog/*" element={<Blog />} />
+									<Route path="/comments/*" element={<Comment />} />
+									<Route path="/categories/*" element={<Category />} />
+								</>
+							)}
 						<Route path="/users/*" element={<User />} />
-						<Route path="/subscriptions/*" element={<Subscription />} />
-						<Route path="/newsletters/*" element={<NewsLetter />} />
-						<Route path="/contacts/*" element={<Contact />} />
+						{user && user.role === "admin" && (
+							<>
+								<Route path="/subscriptions/*" element={<Subscription />} />
+								<Route path="/newsletters/*" element={<NewsLetter />} />
+								<Route path="/contacts/*" element={<Contact />} />
+							</>
+						)}
+
 						<Route path="/logout/*" element={<LogOut />} />
+						<Route path="/payments/*" element={<Payment />} />
+						<Route path="/plans/*" element={<Plan />} />
 						<Route
 							path="*"
 							element={

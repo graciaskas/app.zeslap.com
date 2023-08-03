@@ -11,6 +11,37 @@
     appearance: none;
 }
 
+.input-image {
+    position: relative;
+    width: 120px;
+    height: 100px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   .input-image-actions{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+   }
+   img{
+    max-width: 100px;
+    object-fit: contain;
+   }
+}
+.input-select {
+    z-index: 1;
+    li {
+        list-style-type: none;
+        cursor: pointer;
+        border-radius: .2rem;
+        padding: .3rem;
+        &:hover{
+            background-color: azure;
+        }
+    }
+}
 .input-group { 
     display: flex;
     flex-wrap: nowrap;

@@ -1,13 +1,13 @@
 import React, { useContext, useEffect } from "react";
+
 import { GlobalContext } from "../contexts/GlobalContext";
-import { userLocal, destUrl } from "../utils/utils";
+import { destUrl } from "../contexts/AuthContext";
 
 export default function LogOut() {
-	const client = userLocal();
-	if (client) {
+	const { token } = useContext(GlobalContext);
+	if (token) {
 		window.localStorage.removeItem("zeslap-user");
-		window.location.href = destUrl;
-		return null;
+		return (window.location.href = destUrl);
 	}
-	return null;
+	return (window.location.href = destUrl);
 }

@@ -12,6 +12,7 @@ export default function Index() {
 			<Route path="/create" element={<Create />} />
 			<Route path="/blogs" element={<Blogs />} />
 			<Route path="/view" element={<View />} />
+			<Route path="/edit" element={<Create />} />
 		</Routes>
 	);
 }

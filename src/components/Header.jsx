@@ -1,14 +1,10 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { GlobalContext } from "../contexts/GlobalContext";
 import Toast from "./Toast";
 
-export default function Header() {
-	const { user, error, notify } = useContext(GlobalContext);
-
-	useEffect(() => {
-		console.log(notify);
-	}, [notify]);
+export default function Header({ user }) {
+	const { error, notify } = useContext(GlobalContext);
 
 	return (
 		<>
@@ -43,14 +39,17 @@ export default function Header() {
 									id="dropdownProducts"
 									data-bs-toggle="dropdown"
 									aria-expanded="false">
-									<i className="fa fa-user-circle"></i> {user?.username}
+									<i className="fa fa-user-circle"></i>
+									{user?.username}
 								</Link>
 
 								<ul
 									className="dropdown-menu  p-4 shadow-default border-0 rounded"
 									aria-labelledby="dropdownProducts">
 									<li>
-										<Link to="/profile" className="dropdown-itemx">
+										<Link
+											to={`/users/view?q=${user?.id}`}
+											className="dropdown-itemx">
 											My profile
 										</Link>
 									</li>

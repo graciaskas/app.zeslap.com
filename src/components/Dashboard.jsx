@@ -1,240 +1,212 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useMatch, useParams, useSearchParams } from "react-router-dom";
+import Blog from "./Blog/BlogCard";
 
-import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, LineChart, Line } from 'recharts';
 import {
-  AreaChart,
-  Area,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-    Tooltip,
-    Legend,
-  ResponsiveContainer
+	AreaChart,
+	Area,
+	XAxis,
+	YAxis,
+	CartesianGrid,
+	Tooltip,
+	Legend,
+	ResponsiveContainer,
 } from "recharts";
 
+import { LineChart, Line } from "recharts";
+import { ComposedChart, Bar, Scatter } from "recharts";
+import AppBar from "./AppBar";
+import { GlobalContext } from "../contexts/GlobalContext";
+import Error from "./Error";
+import Toast from "./Toast";
 
-import { ComposedChart, Bar, Scatter } from 'recharts';
-
-
-
+// import Blog from '../Blog';
 const data = [
-  {
-    subject: 'Math',
-    A: 120,
-    B: 110,
-    fullMark: 150,
-  },
-  {
-    subject: 'Chinese',
-    A: 98,
-    B: 130,
-    fullMark: 150,
-  },
-  {
-    subject: 'English',
-    A: 86,
-    B: 130,
-    fullMark: 150,
-  },
-  {
-    subject: 'Geography',
-    A: 99,
-    B: 100,
-    fullMark: 150,
-  },
-  {
-    subject: 'Physics',
-    A: 85,
-    B: 90,
-    fullMark: 150,
-  },
-  {
-    subject: 'History',
-    A: 65,
-    B: 85,
-    fullMark: 150,
-  },
+	{
+		name: "A",
+		uv: 400,
+		pv: 240,
+		amt: 240,
+	},
+	{
+		name: "B",
+		uv: 300,
+		pv: 138,
+		amt: 210,
+	},
+	{
+		name: "C",
+		uv: 200,
+		pv: 980,
+		amt: 220,
+	},
+	{
+		name: "D",
+		uv: 278,
+		pv: 398,
+		amt: 200,
+	},
 ];
 
 export default function Dashboard() {
-  return (
-    <div className="container-lg">
-        <div className="row">
-              
-            <div className="col-lg-4 col-md-6 col-sm-6 col-12">
-                <div className="border-bottom bg-white shadow-default rounded mb-3">
-                    <div className="modal-header">
-                        <h5>Subscriptions</h5>
-                    </div>
-                    <div className="modal-body">
-                        <RadarChart
-                            cx={70}
-                            cy={75}
-                            outerRadius={75}
-                            width={300} height={205}
-                            data={data}
-                            >
-                            <PolarGrid />
-                            <PolarAngleAxis dataKey="subject" />
-                            <PolarRadiusAxis />
-                            <Radar
-                                name="Mike"
-                                dataKey="A"
-                                stroke="#8884d8"
-                                fill="#8884d8"
-                                fillOpacity={0.6}
-                            />
-                        </RadarChart>    
-                    </div>        
-                </div>
-            </div>
-              
-            <div className="col-lg-4 col-md-6 col-sm-6 col-12">
-                <div className="border-bottom bg-white shadow-default rounded mb-3">
-                    <div className="modal-header">
-                        <h5>Subscriptions</h5>
-                    </div>
-                    <div className="py-2">
-                       <LineChart
-                            width={300} height={205}
-                            data={data}
-                            margin={{
-                                top: 0,
-                                right: 0,
-                                left: 0,
-                                bottom: 0
-                            }}>
-                            
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="name" />
-                            <YAxis />
-                            <Tooltip />
-                            <Legend />
-                            <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
-                            <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-                        </LineChart>
-                    </div>        
-                </div>
-            </div>
-              
+	const [params, setParams] = useSearchParams();
+	const [view, setView] = useState(params.get("view"));
+	const [posts, setPosts] = useState([]);
+	const [error, setError] = useState(null);
+	const { BASE_URI, setLoading, headers, getPosts } = useContext(GlobalContext);
 
-            <div className="col-lg-4 col-md-6 col-12">
-            <div className="border-bottom bg-white shadow-default rounded mb-3">
-                <div className="modal-header">
-                    <h5>Subscriptions</h5>
-                </div>
-                <div className="py-2">
-                    <RadarChart
-                        cx={70}
-                        cy={75}
-                        outerRadius={75}
-                        width={300} height={205}
-                        data={data}
-                        >
-                        <PolarGrid />
-                        <PolarAngleAxis dataKey="subject" />
-                        <PolarRadiusAxis />
-                        <Radar
-                            name="Mike"
-                            dataKey="A"
-                            stroke="#8884d8"
-                            fill="#8884d8"
-                            fillOpacity={0.6}
-                        />
-                    </RadarChart>    
-                </div>        
-            </div>
-            </div>
-              
-            <div className="col-lg-6 col-md-6 col-12">
-            <div className="bg-white shadow-default rounded mb-3">
-                <div className="modal-header">
-                <h5>Gracias Kasongo</h5>
-                <i className="badge bg-primary">45</i>
-                </div>
-                <div className="p-3">
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis aspernatur ipsam pariatur, magnam incidunt non nemo porro nam repellendus, sequi voluptatibus dolorem distinctio voluptates officiis, quos consequatur doloribus accusamus odio!
-                    </p>
-                </div>
-            </div>
-            </div>
+	useEffect(function () {
+		getPosts(setPosts);
+	}, []);
 
-            <div className="col-lg-6 col-md-6 col-12">
-                <div className="bg-white shadow-default rounded mb-3">
-                    <div className="modal-header">
-                        <h5>Gracias Kasongo</h5>
-                        <i className="badge bg-danger">54</i>
-                    </div>
-                    <div className="modal-body">
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis aspernatur ipsam pariatur, magnam incidunt non nemo porro nam repellendus, sequi voluptatibus dolorem distinctio voluptates officiis, quos consequatur doloribus accusamus odio!
-                        </p>
-                    </div>
-                </div>
-            </div>
-            
-            <div className="col-12">
-                <h5 className="mb-2">Lastest transactions</h5>
-                <div className="bg-white shadow-default rounded">
-                    <table className="table">
-                        <thead>
-                        <tr>
-                            <th className="border-right">#</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Amount</th>
-                            <th>Cart type</th>
-                            <th>Date</th>
-                            <th className="text-right">State</th>
-                        </tr>
-                        </thead>
-                    
-                        <tbody className='table-body-striped'>
-                            <tr>
-                                <td>5</td>
-                                <td>Gracias Kasongo</td>
-                                <td>Email</td>
-                                <td>$50.00</td>
-                                <td>Visa</td>
-                                <td>30/10/2022</td>
-                                <td className="text-right"><span className="badge bg-success">Completed</span></td>
-                            </tr>
+	//Check if there is an error
+	if (error) {
+		return (
+			<Error code={500} content="The page is not available for the moment!">
+				<Toast type="danger" title="Something went wrong !" content={error} />
+			</Error>
+		);
+	}
 
-                            <tr>
-                                <td>4</td>
-                                <td>Ngudia Kazadi</td>
-                                <td>Email</td>
-                                <td>$750.00</td>
-                                <td>Visa</td>
-                                <td>23/10/2022</td>
-                                <td className="text-right"><span className="badge bg-odoo">Pending</span></td>
-                            </tr>
+	return (
+		<div className="container-lg">
+			<div className="row">
+				<div className="col-lg-4 col-md-6 col-12">
+					<div className="border-bottom bg-white shadow-default rounded mb-3">
+						<div className="modal-header">
+							<h5>Publications</h5>
+							<span role={"button"}>
+								<i className="fa fa-ellipsis-h"></i>
+							</span>
+						</div>
+						<div className="py-2">
+							<AreaChart
+								width={300}
+								height={205}
+								data={data}
+								margin={{
+									top: 0,
+									right: 0,
+									left: 0,
+									bottom: 0,
+								}}>
+								<CartesianGrid strokeDasharray="3 3" />
+								<XAxis dataKey="name" />
+								<YAxis />
+								<Tooltip />
+								<Area
+									type="monotone"
+									dataKey="uv"
+									stackId="1"
+									stroke="#8884d8"
+									fill="#8884d8"
+								/>
+								<Area
+									type="monotone"
+									dataKey="pv"
+									stackId="1"
+									stroke="#82ca9d"
+									fill="#82ca9d"
+								/>
+								<Area
+									type="monotone"
+									dataKey="amt"
+									stackId="1"
+									stroke="#ffc658"
+									fill="#ffc658"
+								/>
+							</AreaChart>
+						</div>
+					</div>
+				</div>
 
-                            <tr>
-                                <td>3</td>
-                                <td>Thina Kasongo</td>
-                                <td>Email</td>
-                                <td>$650.00</td>
-                                <td>Visa</td>
-                                <td>30/10/2022</td>
-                                <td className="text-right"><span className="badge bg-odoo">Pending</span></td>
-                            </tr>
+				<div className="col-lg-4 col-md-6 col-12">
+					<div className="border-bottom bg-white shadow-default rounded mb-3">
+						<div className="modal-header">
+							<h5>Shares</h5>
+							<span role={"button"}>
+								<i className="fa fa-ellipsis-h"></i>
+							</span>
+						</div>
+						<div className="py-2">
+							<LineChart
+								width={300}
+								height={205}
+								data={data}
+								margin={{
+									top: 0,
+									right: 0,
+									left: 0,
+									bottom: 0,
+								}}>
+								<CartesianGrid strokeDasharray="3 3" />
+								<XAxis dataKey="name" />
+								<YAxis />
+								<Tooltip />
+								<Legend />
+								<Line
+									type="monotone"
+									dataKey="pv"
+									stroke="#8884d8"
+									activeDot={{ r: 8 }}
+								/>
+								<Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+							</LineChart>
+						</div>
+					</div>
+				</div>
 
-                            <tr>
-                                <td>2</td>
-                                <td>Gracias Kasongo</td>
-                                <td>Email</td>
-                                <td>$50.00</td>
-                                <td>Visa</td>
-                                <td>30/10/2022</td>
-                                <td className="text-right"><span className="badge bg-odoo">Pending</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-  )
+				<div className="col-lg-4 col-12">
+					<div className="border-bottom bg-white shadow-default rounded mb-3">
+						<div className="modal-header">
+							<h5>Category Views</h5>
+							<span role={"button"}>
+								<i className="fa fa-ellipsis-h"></i>
+							</span>
+						</div>
+						<div className="py-2">
+							<ComposedChart
+								width={300}
+								height={205}
+								data={data}
+								margin={{
+									top: 0,
+									right: 0,
+									left: 0,
+									bottom: 0,
+								}}>
+								<CartesianGrid stroke="#f5f5f5" />
+								<XAxis dataKey="name" scale="band" />
+								<YAxis />
+								<Tooltip />
+								<Legend />
+								<Area
+									type="monotone"
+									dataKey="amt"
+									fill="#8884d8"
+									stroke="#8884d8"
+								/>
+								<Bar dataKey="pv" barSize={20} fill="#413ea0" />
+								<Line type="monotone" dataKey="uv" stroke="#ff7300" />
+								<Scatter dataKey="cnt" fill="red" />
+							</ComposedChart>
+						</div>
+					</div>
+				</div>
+
+				<div className="col-12">
+					<div className="p-3 bg-white rounded shadow-default">
+						<h4 className="border-bottom py-2">Lastest posts</h4>
+						<div className="row">
+							{posts.map((post, id) => (
+								<div className="col-lg-6 col-md-6 col-12" key={id}>
+									<Blog data={post} />
+								</div>
+							))}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
 }

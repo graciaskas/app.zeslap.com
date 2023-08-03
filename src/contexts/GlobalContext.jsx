@@ -1,35 +1,166 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
-import { userLocal, userServer } from "../utils/utils";
+import { AuthContext } from "./AuthContext";
 
-const BASE_URI = navigator.onLine
-	? "https://api.zeslap.com/v1"
-	: "http://localhost:8081/v1";
+const BASE_URI = "http://localhost:8081/v1";
+const SITE_URL = "http://localhost:8082/";
 
 export const GlobalContext = React.createContext();
 
 export default function GlobalProvider({ children }) {
-	const [loading, setIsLoading] = useState(false);
-	const [notify, setNotify] = useState(false);
+	const { token } = useContext(AuthContext);
+	//*** App data
+	const [posts, setPosts] = useState([]);
 
-	const [error, setError] = useState({
+	const [loading, setIsLoading] = useState(false);
+	const [log, setLog] = useState(false);
+
+	const [toast, setToast] = useState({
 		title: "Something went wrong",
-		content: "Bla bla",
+		content: "The server is not respoding or something went wrong !",
 		type: "danger",
 	});
 
-	const token = userLocal()?.token;
 	const params = useSearchParams()[0];
 
 	//Custom setState function to manage loading state variable
 	const setLoading = (value) => setTimeout(setIsLoading(value), 500);
+
+	function getNextItems() {}
+
+	function getPreviousItems() {}
+
+	async function getPosts() {
+		setLoading(true);
+		try {
+			const res = await fetch(BASE_URI + "/posts", {
+				method: "GET",
+				headers: {
+					authorization: "Bearer " + token,
+				},
+			});
+			const json = await res.json();
+			setLoading(false);
+
+			res.status === 200
+				? setPosts(json.data)
+				: setToast({
+						...toast,
+						content: json.message,
+				  });
+		} catch (error) {
+			setLog(true);
+			setLoading(false);
+			throw Error(error);
+		}
+	}
+
+	async function getPost(setPost, id) {
+		setLoading(true);
+		try {
+			const response = await fetch(BASE_URI + "/posts/" + id, {
+				headers: {
+					authorization: "Bearer " + token,
+				},
+			});
+			const { data } = await response.json();
+			setLoading(false);
+
+			if (!response.error) return setPost(data);
+			setLog(true);
+			setToast({
+				...toast,
+				content:
+					data.message ||
+					"The Post you tried to view is not found on this server !",
+			});
+		} catch (e) {
+			setLoading(false);
+			setToast({ ...toast, content: e.message });
+			throw Error(e);
+		}
+	}
+
+	/**
+	 * Get Blog comments
+	 * @param {*} setPostComments
+	 * @param {*} postId
+	 * @returns
+	 */
+	async function getPostComments(setPostComments, postId = null) {
+		setLoading(true);
+		try {
+			const response = await fetch(BASE_URI + "/comments/?blog=" + postId, {
+				headers: {
+					authorization: "Bearer " + token,
+				},
+			});
+			setLoading(false);
+
+			if (response.status < 399) {
+				const { data } = await response.json();
+				setPostComments(data);
+				return;
+			}
+		} catch (toast) {}
+	}
+
+	async function getComments(setComments) {
+		setLoading(true);
+		try {
+			const res = await fetch(BASE_URI + "/comments", {
+				method: "GET",
+				headers: {
+					authorization: "Bearer " + token,
+				},
+			});
+			const json = await res.json();
+			setLoading(false);
+
+			res.status === 200
+				? setComments(json.data)
+				: setToast({
+						...toast,
+						content: json.message,
+				  });
+		} catch (error) {
+			setLog(true);
+			setLoading(false);
+			throw Error(error);
+		}
+	}
+
+	async function getCategories(setCategories) {
+		setLoading(true);
+		try {
+			const res = await fetch(BASE_URI + "/categories", {
+				method: "GET",
+				headers: {
+					authorization: "Bearer " + token,
+				},
+			});
+			const json = await res.json();
+			setLoading(false);
+
+			res.status === 200
+				? setCategories(json.data)
+				: setToast({
+						...toast,
+						content: json.message,
+				  });
+		} catch (error) {
+			console.log(error);
+			setLog(true);
+			setLoading(false);
+		}
+	}
 
 	const getBase64 = (file) => {
 		return new Promise((resolve, reject) => {
 			const reader = new FileReader();
 			reader.readAsDataURL(file);
 			reader.onload = () => resolve(reader.result);
-			reader.onerror = (e) => reject(e);
+			reader.ontoast = (e) => reject(e);
 		});
 	};
 
@@ -39,12 +170,17 @@ export default function GlobalProvider({ children }) {
 		loading,
 		getBase64,
 		setLoading,
-
-		error,
-		setError,
-
-		setNotify,
-		notify,
+		getPosts,
+		posts,
+		getPost,
+		getPostComments,
+		getComments,
+		getCategories,
+		toast,
+		setToast,
+		SITE_URL,
+		setLog,
+		log,
 		params,
 		headers: {
 			authorization: "Bearer " + token,

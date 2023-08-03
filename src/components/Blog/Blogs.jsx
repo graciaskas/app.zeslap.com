@@ -11,42 +11,15 @@ import Blog from "./BlogCard";
 import NewDocument from "../NewDocument";
 
 export default function Blogs() {
-	const { BASE_URI, setLoading, headers, params } = useContext(GlobalContext);
-	const [posts, setPosts] = useState([]);
+	const { params, getPosts, posts } = useContext(GlobalContext);
+
 	const [error, setError] = useState(null);
 
 	const viewType = params.get("view") || "th";
 
-	async function fetchPosts() {
-		setLoading(true);
-		try {
-			const res = await fetch(BASE_URI + "/posts", {
-				method: "GET",
-				headers: { ...headers },
-			});
-			const resJSON = await res.json();
-			setLoading(false);
-
-			res.status === 200 ? setPosts(resJSON.data) : setError(resJSON.message);
-		} catch (error) {
-			console.log(error);
-			setError(error.message);
-			setLoading(false);
-		}
-	}
-
 	useEffect(function () {
-		fetchPosts();
+		getPosts();
 	}, []);
-
-	//Check if there is an error
-	if (error) {
-		return (
-			<Error code={500} content="The page is not available for the moment!">
-				<Toast type="danger" title="Something went wrong !" content={error} />
-			</Error>
-		);
-	}
 
 	return (
 		<div className="container-lg">
@@ -60,20 +33,18 @@ export default function Blogs() {
 
 				<div className="col-12">
 					<div className="p-3 bg-white rounded shadow-default">
-						{!posts.length && (
-							<NewDocument title="Create a new blog" content="" />
-						)}
 						{viewType === "list" ? (
 							<table className="table border">
 								<thead>
 									<tr>
 										<th className="border-right">#</th>
 										<th>Blog title</th>
-										<th>Email</th>
-										<th>Amount</th>
-										<th>Cart type</th>
+										<th>Category</th>
+										<th>Likes</th>
+										<th>Comments</th>
 										<th>Date</th>
 										<th className="text-right">State</th>
+										<th>Actions</th>
 									</tr>
 								</thead>
 
@@ -82,14 +53,20 @@ export default function Blogs() {
 										<tr key={id}>
 											<td>{post.id}</td>
 											<td>Gracias Kasongo</td>
-											<td>Email</td>
-											<td>$50.00</td>
-											<td>Visa</td>
-											<td>30/10/2022</td>
+											<td>{post.category_id[1]}</td>
+											<td>{post.likes}</td>
+											<td>{post.comments}</td>
+											<td>{new Date(post.create_date).toLocaleString()}</td>
 											<td className="text-right">
-												<span className=" rounded-pill badge bg-success">
-													Completed
+												<span className=" rounded-pill badge bg-primary">
+													Posted
 												</span>
+											</td>
+											<td className="d-flex justify-content-between">
+												<Link to={`/blog/view?blog=${post.id}`}>
+													<span className="fa fa-link" />
+												</Link>
+												<span className="fa fa-trash text-danger" />
 											</td>
 										</tr>
 									))}
@@ -98,7 +75,7 @@ export default function Blogs() {
 						) : (
 							<div className="row">
 								{posts.map((post, id) => (
-									<div className="col-lg-6 col-md-6 col-12" key={id}>
+									<div className="col-lg-4 col-md-6 col-12" key={id}>
 										<Blog data={post} />
 									</div>
 								))}
