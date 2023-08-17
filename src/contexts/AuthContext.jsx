@@ -36,6 +36,7 @@ export default function AuthProvider({ children }) {
 	let auth = params.has("auth") && params.get("auth");
 
 	useEffect(() => {
+		//Store token on first user access app with the "auth" parameter
 		if (auth) {
 			window.localStorage.setItem(
 				"zeslap-user",
@@ -45,19 +46,20 @@ export default function AuthProvider({ children }) {
 			);
 		}
 
+		//Check if token is stored
 		if (!getToken()) {
 			return (window.location.href = destUrl);
 		}
 
+		//Parse the token as user
 		const user = parseJwt(getToken());
 
+		//Check user and token not expired
 		if (!user || user.exp * 1000 < Date.now()) {
 			return (window.location.href = destUrl);
 		}
 
 		setState({ authenticated: true, user });
-
-		// getUser(getToken());
 	}, [currentLocation]);
 
 	const values = {

@@ -63,7 +63,7 @@ export default function Blogs() {
 												</span>
 											</td>
 											<td className="d-flex justify-content-between">
-												<Link to={`/blog/view?blog=${post.id}`}>
+												<Link to={`/blog/view?blog=${post._id}`}>
 													<span className="fa fa-link" />
 												</Link>
 												<span className="fa fa-trash text-danger" />

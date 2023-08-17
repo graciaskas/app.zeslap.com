@@ -126,7 +126,7 @@ function Blog(props) {
 
 						<div className="d-flex align-items-center justify-content-between border-top pt-3">
 							<Link
-								to={`/blog/edit?blog=${post.id}`}
+								to={`/blog/edit?blog=${post._id}`}
 								role={"button"}
 								className=" btn-sm bg-primary text-white rounded-pill">
 								<i className="fa fa-edit" /> Update content

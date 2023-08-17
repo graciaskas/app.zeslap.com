@@ -7,6 +7,7 @@ import { GlobalContext } from "../../contexts/GlobalContext";
 import AppBar from "../AppBar";
 import Error from "../Error";
 import Toast from "../Toast";
+import ChangePwd from "../Modals/ChangePwd";
 
 export default function View() {
 	const [user, setUser] = useState(null);
@@ -52,10 +53,11 @@ export default function View() {
 					data={[]}
 				/>
 
+				<ChangePwd user={user} />
 				<form className="mt-3 p-3 bg-white rounded shadow-default user-form">
 					<div className="row">
 						<div className="col-12">
-							<div className="d-flex user-stats">
+							{/* <div className="d-flex user-stats">
 								<div className="stat-button d-flex align-item-center">
 									<i class="fa fa-users stat-icon"></i>
 									<div class="stat-info">
@@ -79,6 +81,17 @@ export default function View() {
 										<span class="d-block">Blog posts</span>
 									</div>
 								</div>
+							</div> */}
+
+							<div className="d-flex user-stats">
+								<button
+									className="stat-button"
+									type="button"
+									data-bs-toggle="modal"
+									data-bs-target="#changePwdModal">
+									<i class="fa fa-cogs stat-icon"></i>
+									Change password
+								</button>
 							</div>
 						</div>
 
@@ -157,33 +170,6 @@ export default function View() {
 											Personnal information
 										</a>
 									</li>
-									<li class="nav-item">
-										<a
-											class="nav-link text-secondary text-raleway"
-											data-bs-toggle="tab"
-											data-bs-target="#u_history"
-											href="#u_history">
-											Payments history
-										</a>
-									</li>
-									<li class="nav-item">
-										<a
-											class="nav-link text-secondary text-raleway"
-											data-bs-toggle="tab"
-											data-bs-target="#u_plans"
-											href="#u_plans">
-											Plans
-										</a>
-									</li>
-									<li class="nav-item">
-										<a
-											class="nav-link text-secondary text-raleway"
-											data-bs-toggle="tab"
-											data-bs-target="#u_pref"
-											href="#u_pref">
-											Preferences
-										</a>
-									</li>
 								</ul>
 
 								<div className="tab-content p-2" id="userTabContent">
@@ -237,45 +223,6 @@ export default function View() {
 												</div>
 											</div>
 										</div>
-									</div>
-
-									<div className="tab-pane" id="u_plans" role="tabpanel">
-										<h5>My Plans</h5>
-										<table className="table border">
-											<thead>
-												<tr>
-													<th>
-														<input type="checkbox" name="" id="" />
-													</th>
-													<th>#code</th>
-													<th>Name</th>
-													<th>Price</th>
-													<th>Start On</th>
-													<th>Expire On</th>
-													<th>Status</th>
-													<th className="text-right">Auto renew</th>
-												</tr>
-											</thead>
-
-											<tbody className="table-body-striped">
-												<tr>
-													<td>
-														<input type="checkbox" name="" id="" />
-													</td>
-													<td>OH564</td>
-													<td>Hosting standard</td>
-													<td>$ 50</td>
-													<td>20.12.2022</td>
-													<td>20.12.2023</td>
-													<td>
-														<span className="badge bg-success rounded-pill">
-															Active
-														</span>
-													</td>
-													<td>True</td>
-												</tr>
-											</tbody>
-										</table>
 									</div>
 								</div>
 							</div>

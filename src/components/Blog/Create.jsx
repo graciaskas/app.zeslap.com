@@ -45,7 +45,7 @@ export default function Create() {
 		if (params.has("blog") || Number(params.get("blog"))) {
 			setAction("edit");
 			//Fetch post and bind result to state
-			getPost(setPost, parseInt(params.get("blog")));
+			getPost(setPost, params.get("blog"));
 		}
 	}, []);
 

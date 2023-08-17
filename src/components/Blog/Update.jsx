@@ -51,7 +51,7 @@ export default function Update() {
 			});
 
 			//Fetch post and bind result to state
-			getPost(setPost, parseInt(params.get("blog")));
+			getPost(setPost, params.get("blog"));
 			//Set post cover image display;
 			if (post) {
 				console.log(post);
