@@ -48,6 +48,7 @@ function View(props) {
 
 	useEffect(() => {
 		fetchContacts();
+		console.log(process.env);
 	}, []);
 
 	//Check if there is an error

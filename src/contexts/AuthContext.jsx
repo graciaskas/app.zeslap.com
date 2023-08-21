@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-// export const destUrl = "http://localhost:8082/login";
-// export const apiUrl = "http://localhost:8081/v1";
-
-export const destUrl = "https://zeslap.com/login";
-export const apiUrl = "https://api.zeslap.com/v1";
+export const destUrl =
+	process.env.REACT_APP_MODE === "production"
+		? "https://zeslap.com/login"
+		: "http://localhost:8082/login";
 
 export const AuthContext = React.createContext();
 

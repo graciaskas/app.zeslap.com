@@ -2,8 +2,15 @@ import React, { useEffect, useState, useContext } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { AuthContext } from "./AuthContext";
 
-const BASE_URI = "http://localhost:8081/v1";
-const SITE_URL = "http://localhost:8082/";
+const SITE_URL =
+	process.env.REACT_APP_MODE === "production"
+		? "https://zeslap.com/"
+		: "http://localhost:8082/";
+
+export const BASE_URI =
+	process.env.REACT_APP_MODE === "production"
+		? "https://api.zeslap.com/v1"
+		: "http://localhost:8081/v1";
 
 export const GlobalContext = React.createContext();
 
