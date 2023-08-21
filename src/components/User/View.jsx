@@ -213,13 +213,12 @@ export default function View() {
 													<span className="input-group-text" id="basic-addon1">
 														<i className="fa fa-th" />
 													</span>
-													<input
-														type="text"
-														placeholder="Title"
-														required
-														disabled
-														value={"Software developer"}
-													/>
+													<select type="text" placeholder="Title">
+														<option>User role</option>
+														<option value={"user"}>User</option>
+														<option value={"admin"}>Admin</option>
+														<option value={"author"}>Author</option>
+													</select>
 												</div>
 											</div>
 										</div>

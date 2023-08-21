@@ -43,7 +43,7 @@ export default function App() {
 	const { title, type, content } = toast;
 
 	useEffect(() => {
-		console.log(user, process.env.REACT_APP_MODE);
+		console.log(user?.role);
 	}, [user]);
 
 	return (

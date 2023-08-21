@@ -19,6 +19,7 @@ import AppBar from "./AppBar";
 import { GlobalContext } from "../contexts/GlobalContext";
 import Error from "./Error";
 import Toast from "./Toast";
+import { AuthContext } from "../contexts/AuthContext";
 
 // import Blog from '../Blog';
 const data = [
@@ -54,6 +55,7 @@ export default function Dashboard() {
 
 	const [error, setError] = useState(null);
 	const { getPosts, posts } = useContext(GlobalContext);
+	const { user } = useContext(AuthContext);
 
 	useEffect(function () {
 		getPosts({ limit: 2 });
@@ -194,15 +196,89 @@ export default function Dashboard() {
 					</div>
 				</div>
 
+				{user?.role !== "user" && (
+					<div className="col-12">
+						<div className="p-3 bg-white rounded shadow-default">
+							<h4 className="border-bottom py-2">Lastest posts</h4>
+							<div className="row">
+								{posts.map((post, id) => (
+									<div className="col-lg-6 col-md-6 col-12" key={id}>
+										<Blog data={post} />
+									</div>
+								))}
+							</div>
+						</div>
+					</div>
+				)}
 				<div className="col-12">
-					<div className="p-3 bg-white rounded shadow-default">
-						<h4 className="border-bottom py-2">Lastest posts</h4>
+					<div className="">
 						<div className="row">
-							{posts.map((post, id) => (
-								<div className="col-lg-6 col-md-6 col-12" key={id}>
-									<Blog data={post} />
+							<div className="col-md-6 ">
+								<div className="p-3 bg-white rounded shadow-default">
+									<h4 className="border-bottom py-2">Lastest payments</h4>
+									<table className="table table-sm">
+										<thead>
+											<tr>
+												<th>#no</th>
+												<th>Date</th>
+												<th>Amout</th>
+												<th>State</th>
+											</tr>
+										</thead>
+										{/* <tbody>
+											<tr>
+												<td>#45</td>
+												<td>2023-08-12</td>
+												<td>$ 567.09</td>
+												<td>
+													<span className="badge bg-success text-white">
+														Paid
+													</span>
+												</td>
+											</tr>
+											<tr>
+												<td>#65</td>
+												<td>2023-08-12</td>
+												<td>$ 867.09</td>
+												<td>
+													<span className="badge bg-success text-white">
+														Paid
+													</span>
+												</td>
+											</tr>
+										</tbody> */}
+									</table>
 								</div>
-							))}
+							</div>
+
+							<div className="col-md-6 ">
+								<div className="p-3 bg-white rounded shadow-default">
+									<h4 className="border-bottom py-2">Lastest payments</h4>
+									{/* <table className="table table-sm">
+										<thead>
+											<tr>
+												<th>#no</th>
+												<th>Date</th>
+												<th>Amout</th>
+												<th>State</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>#45</td>
+												<td>2023-08-12</td>
+												<td>$ 567.09</td>
+												<td>
+													<span className="badge bg-success text-white">
+														Paid
+													</span>
+												</td>
+											</tr>
+											
+										</tbody>
+									</table> */}
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

@@ -28,39 +28,6 @@ export default function Users() {
 		{ name: "email", title: "Email" },
 	];
 
-	async function fetchUsers() {
-		setLoading(true);
-		try {
-			const response = await fetch(BASE_URI + "/users?sort=all", { headers });
-			setLoading(false);
-			if (response.status === 200) {
-				const { data } = await response.json();
-				setUsers(data);
-				return;
-			}
-			//When server respond with error message
-			const { message } = await response.json();
-			setError(message);
-		} catch (e) {
-			console.error(e);
-			setError(e.message);
-			setLoading(false);
-		}
-	}
-
-	useEffect(() => {
-		fetchUsers();
-	}, []);
-
-	//Check if there is an error
-	if (error) {
-		return (
-			<Error code={500} content="The page is not available for the moment!">
-				<Toast type="danger" title="Something went wrong !" content={error} />
-			</Error>
-		);
-	}
-
 	// //check if data is fetched
 	// if (users.length === 0) return;
 
@@ -70,7 +37,7 @@ export default function Users() {
 			<div className="row">
 				<AppBar data={users} appName="Payments" viewTypes={["list"]} />
 
-				<Table data={users} fields={fields} />
+				{/* <Table data={users} fields={fields} /> */}
 			</div>
 		</div>
 	);
