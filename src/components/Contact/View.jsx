@@ -4,7 +4,8 @@ import { GlobalContext } from "../../contexts/GlobalContext";
 import AppBar from "../AppBar";
 import Error from "../Error";
 import Toast from "../Toast";
-import Keyboard from "../Keyboard";
+
+import Editor from "../Editor";
 
 function View(props) {
 	const [contact, setContact] = useState(null);
@@ -120,7 +121,7 @@ function View(props) {
 					)}
 				</div>
 
-				<Keyboard />
+				<Editor />
 			</form>
 		</div>
 	);

@@ -18,7 +18,7 @@ export default function Blogs() {
 	const viewType = params.get("view") || "th";
 
 	useEffect(function () {
-		getPosts();
+		getPosts({ limit: 12 });
 	}, []);
 
 	return (

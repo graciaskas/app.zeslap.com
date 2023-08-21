@@ -51,12 +51,12 @@ const data = [
 export default function Dashboard() {
 	const [params, setParams] = useSearchParams();
 	const [view, setView] = useState(params.get("view"));
-	const [posts, setPosts] = useState([]);
+
 	const [error, setError] = useState(null);
-	const { BASE_URI, setLoading, headers, getPosts } = useContext(GlobalContext);
+	const { getPosts, posts } = useContext(GlobalContext);
 
 	useEffect(function () {
-		getPosts(setPosts);
+		getPosts({ limit: 2 });
 	}, []);
 
 	//Check if there is an error

@@ -30,10 +30,10 @@ export default function GlobalProvider({ children }) {
 
 	function getPreviousItems() {}
 
-	async function getPosts() {
+	async function getPosts({ limit = 10 }) {
 		setLoading(true);
 		try {
-			const res = await fetch(BASE_URI + "/posts", {
+			const res = await fetch(`${BASE_URI}/posts?limit=${limit}`, {
 				method: "GET",
 				headers: {
 					authorization: "Bearer " + token,
