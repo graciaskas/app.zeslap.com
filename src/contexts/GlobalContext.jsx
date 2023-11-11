@@ -16,6 +16,7 @@ export const GlobalContext = React.createContext();
 
 export default function GlobalProvider({ children }) {
 	const { token } = useContext(AuthContext);
+	
 	//*** App data
 	const [posts, setPosts] = useState([]);
 
@@ -170,6 +171,10 @@ export default function GlobalProvider({ children }) {
 			reader.ontoast = (e) => reject(e);
 		});
 	};
+
+	useEffect(()=>{
+		console.log(document.querySelectorAll('button[name="modifyBtn"]'));
+	},[])
 
 	//Context shared values
 	const values = {

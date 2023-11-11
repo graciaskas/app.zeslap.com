@@ -24,7 +24,7 @@
     .dropdown-itemx {
         color: map-get($colors, 'secondary') !important;
         font-weight: normal !important;
-        font-family: 'Montserrat', sans-serif !important;
+       
         text-transform: capitalize !important;
         font-size: .85rem !important;
         margin-left: 0 !important;
@@ -42,7 +42,7 @@
     .dropdown-item {
         color: map-get($colors, 'secondary') !important;
         font-weight: normal !important;
-        font-family: 'Montserrat', sans-serif !important;
+       
         text-transform: capitalize !important;
         font-size: .85rem !important;
         padding: .25rem .5rem;

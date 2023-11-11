@@ -39,6 +39,8 @@ export default function Create() {
 		category_id: null,
 		content: null,
 		cover: null,
+		description: "",
+		tags:[]
 	});
 
 	useEffect(() => {
@@ -92,11 +94,15 @@ export default function Create() {
 			setLoading(false);
 			const json = await response.json();
 
-			//Handle user UI Error view
-			setLog(true);
-			setToast({ ...toast, content: json.message });
+			
 
 			if (response.status === 200) {
+				//Handle user UI Error view
+				setLog(true);
+				setToast({ ...toast, 
+					content: "Post creation completed with success !", type:"success" ,
+					title:"Post action done"
+				});
 				return navigate("/blog/blogs");
 			}
 		} catch (e) {
@@ -115,12 +121,11 @@ export default function Create() {
 				headers,
 			});
 			let json = await request.json();
-			if (string === "" || string == null) {
-				setSelecting(false);
-			}
-			if (request.status > 399) {
-				return;
-			}
+
+			//console.log(json);
+			if (string === "" || string == null) setSelecting(false);
+			
+			if (request.status > 399) return;
 
 			setCategories(json.data);
 		} catch (toast) {
@@ -181,6 +186,7 @@ export default function Create() {
 							<div className="col-12">
 								<div className="p-3 bg-white mt-3 shadow-default rounded">
 									<div className="row">
+										
 										<div className="col-md-2">
 											<div className="border mt-2 rounded input-image">
 												<div className="input-image-actions d-flex justify-content-between bg-primary text-white p-1 px-2">
@@ -210,6 +216,7 @@ export default function Create() {
 
 										<div className="col-md-10">
 											<div className="row">
+
 												<div className="col-md-6 col-12">
 													<div className="input-group border  w-100 mt-2 ">
 														<span
@@ -219,16 +226,11 @@ export default function Create() {
 														</span>
 														<input
 															type="text"
-															placeholder="Blog title"
+															placeholder="Post title"
 															required
 															name="title"
 															defaultValue={post?.title}
-															onChange={(e) =>
-																setState({
-																	...state,
-																	title: e.target.value,
-																})
-															}
+															onChange={(e) =>setState({...state,title: e.target.value})}
 														/>
 													</div>
 												</div>
@@ -242,7 +244,7 @@ export default function Create() {
 														</span>
 														<input
 															type="text"
-															placeholder="Blog category"
+															placeholder="Post category"
 															onChange={(e) => selectCategory(e)}
 															required
 															defaultValue={post?.category_id[1]}
@@ -270,8 +272,45 @@ export default function Create() {
 													)}
 												</div>
 
+												{/* Post description field */}
 												<div className="col-md-12">
-													<div className="border mt-2"></div>
+													<div className="input-group border  w-100 mt-2">
+														<span
+															className="input-group-text"
+															id="basic-addon1">
+															<i className="fa fa-list" />
+														</span>
+														<input
+															type="text"
+															placeholder="Post tags (separte with a coma)"
+															onChange={(e) => {
+																let tags = e.target.value;
+																tags.split(",")
+																setState({...state, tags })}
+															}
+															name="tags"
+														/>
+													</div>
+												</div>
+
+												{/* Post description field */}
+												<div className="col-md-12">
+													<div className="input-group border  w-100 mt-2">
+														<span
+															className="input-group-text"
+															id="basic-addon1">
+															<i className="fa fa-book" />
+														</span>
+														<textarea
+															type="text"
+															placeholder="Post description"
+															onChange={(e) => setState({
+																...state, description: e.target.value})}
+
+															name="description"
+															
+														/>
+													</div>
 												</div>
 											</div>
 										</div>

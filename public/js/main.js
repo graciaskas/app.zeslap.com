@@ -1,4 +1,7 @@
+
+
 class Editor {
+    "use strict";
 
     constructor() {
         //Buttons

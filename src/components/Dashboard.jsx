@@ -73,6 +73,12 @@ export default function Dashboard() {
 	return (
 		<div className="container-lg">
 			<div className="row">
+
+				<div className="col-12">
+					<h2>Hello {user?.username}</h2>
+					<p>We are happy to see you again...</p>
+				</div>
+
 				<div className="col-lg-4 col-md-6 col-12">
 					<div className="border-bottom bg-white shadow-default rounded mb-3">
 						<div className="modal-header">
@@ -161,7 +167,7 @@ export default function Dashboard() {
 				<div className="col-lg-4 col-12">
 					<div className="border-bottom bg-white shadow-default rounded mb-3">
 						<div className="modal-header">
-							<h5>Category Views</h5>
+							<h5>Site Visit</h5>
 							<span role={"button"}>
 								<i className="fa fa-ellipsis-h"></i>
 							</span>
@@ -197,7 +203,7 @@ export default function Dashboard() {
 				</div>
 
 				{user?.role !== "user" && (
-					<div className="col-12">
+					<div className="col-12 mb-3">
 						<div className="p-3 bg-white rounded shadow-default">
 							<h4 className="border-bottom py-2">Lastest posts</h4>
 							<div className="row">

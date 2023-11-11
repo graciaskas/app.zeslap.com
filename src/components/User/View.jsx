@@ -4,231 +4,386 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 import { GlobalContext } from "../../contexts/GlobalContext";
-import AppBar from "../AppBar";
+import AppBarCreate from "../AppBarCreate";
 import Error from "../Error";
 import Toast from "../Toast";
 import ChangePwd from "../Modals/ChangePwd";
+import Base from "../../utils/base";
+import { Link } from "react-router-dom";
 
 export default function View() {
-	const [user, setUser] = useState(null);
-	const [error, setError] = useState(null);
-	const { BASE_URI, setLoading, headers, params, setLog, setToast, toast } =
-		useContext(GlobalContext);
+  const [user, setUser] = useState(null);
+  const [error, setError] = useState(null);
+  const [editing, setEditing] = useState(true);
 
-	async function fetchUser() {
-		if (!params.has("q")) return;
-		setLoading(true);
-		try {
-			const id = params.get("q");
-			const request = await fetch(BASE_URI + "/users/" + id, {
-				headers,
-			});
-			const response = await request.json();
-			setLoading(false);
+  const [state, setState] = useState({});
 
-			if (response.error) {
-				setLog(true);
-				setToast({ ...toast, content: response.error });
-				return;
-			}
-			setUser(response.data);
-		} catch (e) {
-			console.log(e);
-			setLoading(false);
-		}
-	}
+  const { BASE_URI, setLoading, headers, params, setLog, setToast, toast } =
+    useContext(GlobalContext);
 
-	useEffect(function () {
-		fetchUser();
-	}, []);
+  async function fetchUser() {
+    if (!params.has("q")) return;
+    setLoading(true);
+    try {
+      const id = params.get("q");
 
-	return (
-		user && (
-			<div className="container">
-				<AppBar
-					appName="Users"
-					title={user.username}
-					create={false}
-					showPagination={false}
-					data={[]}
-				/>
+      const request = await fetch(BASE_URI + "/users/" + id, {
+        headers,
+      });
+      const response = await request.json();
+      setLoading(false);
 
-				<ChangePwd user={user} />
-				<form className="mt-3 p-3 bg-white rounded shadow-default user-form">
-					<div className="row">
-						<div className="col-12">
-							{/* <div className="d-flex user-stats">
-								<div className="stat-button d-flex align-item-center">
-									<i class="fa fa-users stat-icon"></i>
-									<div class="stat-info">
-										<span class="badge bg-secondary d-inline-block">1</span>
-										<span class="d-block">Followers</span>
-									</div>
-								</div>
-								<div className="stat-button d-flex align-item-center">
-									<i class="fa fa-heart stat-icon"></i>
-									<div class="stat-info">
-										<span class="badge bg-secondary d-inline-block">1</span>
-										<span class="d-block">Likes</span>
-									</div>
-								</div>
-								<div className="stat-button d-flex align-item-center px-2">
-									<i class="fa fa-blog stat-icon"></i>
-									<div class="stat-info">
-										<span class="stat_value badge bg-secondary d-inline-block">
-											1
-										</span>
-										<span class="d-block">Blog posts</span>
-									</div>
-								</div>
-							</div> */}
+      if (response.error) {
+        setLog(true);
+        setToast({ ...toast, content: response.error });
+        return;
+      }
 
-							<div className="d-flex user-stats">
-								<button
-									className="stat-button"
-									type="button"
-									data-bs-toggle="modal"
-									data-bs-target="#changePwdModal">
-									<i class="fa fa-cogs stat-icon"></i>
-									Change password
-								</button>
-							</div>
-						</div>
+      setUser(response.data);
+      setState({ ...user });
+    } catch (e) {
+      console.log(e);
+      setLoading(false);
+    }
+  }
 
-						<div className="col-lg-2">
-							<div className="user-profile bg-white p-2 rounded">
-								<div className="image">
-									<img
-										src="/img/_p.jpg"
-										alt=""
-										style={{ height: "120px", width: "100%" }}
-										className="img-fluid rounded"
-									/>
-									<input type="file" hidden id="user-profile" />
-								</div>
-							</div>
-						</div>
+  async function updateUser(e) {
+    e.preventDefault();
+    try {
+      const response = await fetch(`${BASE_URI}/users/${user?._id}`, {
+        method: "PUT",
+        headers: {
+          "Conten-Type": "application/json",
+          ...headers,
+        },
+        body: JSON.stringify(state),
+      });
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-						<div className="col-lg-10">
-							<div className="row">
-								<div className="col-md-6 col-12">
-									<div className="input-group border  w-100 mt-2 bg-gray-light-2">
-										<span className="input-group-text" id="basic-addon1">
-											<i className="fa fa-user" />
-										</span>
-										<input
-											type="text"
-											placeholder="Names"
-											required
-											disabled
-											value={user.username}
-										/>
-									</div>
-								</div>
+  useEffect(function () {
+    fetchUser();
+    setTimeout(() => new Base(), 25);
+  }, []);
 
-								<div className="col-md-6 col-12">
-									<div className="input-group border w-100 mt-2 bg-gray-light-2">
-										<span className="input-group-text" id="basic-addon1">
-											<i className="fa fa-at" />
-										</span>
-										<input
-											type="email"
-											placeholder="Email"
-											required
-											disabled
-											value={user.email}
-										/>
-									</div>
-								</div>
+  return (
+    user && (
+      <>
+        <ChangePwd user={user} />
+        <form className="container form__sheet" onSubmit={(e) => updateUser(e)}>
+          <div className="col-12">
+            <div className="bg-white  rounded shadow-default p-3">
+              <div className="text-secondary h5 text-raleway">
+                <Link to={"/"}>
+                  <i className="fa fa-home" />
+                </Link>{" "}
+                /<Link to={"/users"}>Users</Link> /{user?.username}
+              </div>
+              <div className="border-top pt-3">
+                {editing && (
+                  <button
+                    name="modifyBtn"
+                    type="button"
+                    className="btn bg-primary"
+                    style={{ marginRight: "7px" }}
+                    onClick={(e) => setEditing(false)}
+                  >
+                    Modify
+                  </button>
+                )}
+                {!editing && (
+                  <button
+                    type="submit"
+                    className="btn bg-primary"
+                    style={{ marginRight: "7px" }}
+                  >
+                    Save
+                  </button>
+                )}
+                <Link to={"/users"} className="btn bg-gray ml-4">
+                  Cancel
+                </Link>
+              </div>
+            </div>
+          </div>
 
-								<div className="col-12">
-									<div className="input-group border w-100 mt-3 bg-gray-light-2">
-										<span className="input-group-text" id="basic-addon1">
-											<i className="fa fa-th" />
-										</span>
-										<input
-											type="text"
-											placeholder="Title"
-											required
-											disabled
-											value={"Software developer"}
-										/>
-									</div>
-								</div>
-							</div>
-						</div>
+          <div className="mt-3 p-3 bg-white rounded shadow-default user-form">
+            <div className="row">
+              <div className="col-12">
+                <div className="d-flex user-stats">
+                  {user?.role === "author" && (
+                    <>
+                      <div className="stat-button d-flex align-item-center">
+                        <i class="fa fa-users stat-icon"></i>
+                        <div class="stat-info">
+                          <span class="badge bg-secondary d-inline-block">
+                            1
+                          </span>
+                          <span class="d-block">Followers</span>
+                        </div>
+                      </div>
+                      <div className="stat-button d-flex align-item-center">
+                        <i class="fa fa-heart stat-icon"></i>
+                        <div class="stat-info">
+                          <span class="badge bg-secondary d-inline-block">
+                            1
+                          </span>
+                          <span class="d-block">Likes</span>
+                        </div>
+                      </div>
+                      <div className="stat-button d-flex align-item-center px-2">
+                        <i class="fa fa-blog stat-icon"></i>
+                        <div class="stat-info">
+                          <span class="stat_value badge bg-secondary d-inline-block">
+                            1
+                          </span>
+                          <span class="d-block">Blog posts</span>
+                        </div>
+                      </div>
+                    </>
+                  )}
 
-						<div className="col-12">
-							<div className="p-2 bg-white">
-								<ul class="nav nav-tabs" id="userTab" role="tablist">
-									<li class="nav-item" role="presentation">
-										<a
-											class="nav-link text-secondary text-raleway active"
-											data-bs-toggle="tab"
-											data-bs-target="#info"
-											href="#info">
-											Personnal information
-										</a>
-									</li>
-								</ul>
+                  <div className="stat-button d-flex align-item-center px-2">
+                    <i class="fa fa-cogs stat-icon"></i>
 
-								<div className="tab-content p-2" id="userTabContent">
-									<div
-										className="tab-pane show active"
-										id="info"
-										role="tabpanel">
-										<div className="row">
-											<div className="col-md-6 col-12">
-												<div className="input-group border  w-100 mt-2 bg-gray-light-2">
-													<span className="input-group-text" id="basic-addon1">
-														<i className="fa fa-phone" />
-													</span>
-													<input
-														type="number"
-														placeholder="Phone number"
-														required
-														disabled
-														value={user.phone}
-													/>
-												</div>
-											</div>
+                    <div
+                      role="button"
+                      data-bs-toggle="modal"
+                      data-bs-target="#changePwdModal"
+                    >
+                      <span class="d-block">Change password</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-											<div className="col-md-6 col-12">
-												<div className="input-group border w-100 mt-2 bg-gray-light-2">
-													<span className="input-group-text" id="basic-addon1">
-														<i className="fa fa-at" />
-													</span>
-													<input
-														type="url"
-														placeholder="Webiste url"
-														required
-														disabled
-														value={user.website}
-													/>
-												</div>
-											</div>
+              <div className="col-lg-2 ">
+                <div className="user-profile bg-white p-2 rounded d-flex">
+                  <div className="image">
+                    <img
+                      src="/img/_p.jpg"
+                      alt=""
+                      style={{ height: "120px", width: "100%" }}
+                      className="img-fluid rounded"
+                    />
+                    <input type="file" hidden id="user-profile" />
+                  </div>
+                </div>
+              </div>
 
-											<div className="col-md-6 col-12">
-												<div className="input-group border w-100 mt-3 bg-gray-light-2">
-													<span className="input-group-text" id="basic-addon1">
-														<i className="fa fa-th" />
-													</span>
-													<select type="text" placeholder="Title">
-														<option>User role</option>
-														<option value={"user"}>User</option>
-														<option value={"admin"}>Admin</option>
-														<option value={"author"}>Author</option>
-													</select>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</form>
-			</div>
-		)
-	);
+              <div className="col-lg-10">
+                <div className="">
+                  <div class="d-flex mb-2">
+                    <div class="d-flex align-items-center">
+                      <input
+                        type="radio"
+                        name="type_personnal"
+                        id="personnal"
+                        checked
+                      />
+                      <label
+                        htmlFor="personnal"
+                        class="form-check-label"
+                        className="mx-2"
+                      >
+                        Personnal account
+                      </label>
+                    </div>
+
+                    <div class="d-flex align-items-center mx-4">
+                      <input type="radio" name="type_personnal" id="company" />
+                      <label
+                        htmlFor="company"
+                        class="form-check-label"
+                        className="mx-2"
+                      >
+                        Company account
+                      </label>
+                    </div>
+                  </div>
+
+                  <div className="">
+                    <h5>
+                      <label htmlhtmlFor="name">Full Name</label>
+                    </h5>
+                    <input
+                      type="text"
+                      placeholder="Names"
+                      onChange={(e) =>
+                        setState({ ...state, username: e.target.value })
+                      }
+                      className="w-100"
+                      disabled
+                      id="name"
+                      value={user.username}
+                    />
+                  </div>
+
+                  <div className="oe_group grid grid-cols-2 w-[90%]">
+                    <table className="oe_group oe_group_col_6 oe_inner_group">
+                      <tbody>
+                        {/* <div><h4 className='font-bold mb-2'>Informations personnelles</h4></div> */}
+                        <tr>
+                          <td className="oe_label">
+                            <label htmlhtmlFor="name">Address</label>
+                          </td>
+                          <td className="w-100">
+                            <input
+                              type="text"
+                              className="oe_input"
+                              placeholder="Address"
+                              onChange={(e) =>
+                                setState({
+                                  ...state,
+                                  adress_string: e.target.value,
+                                })
+                              }
+                              disabled
+                            />
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td className="oe_label">
+                            {" "}
+                            <label htmlhtmlFor="name">Company name</label>
+                          </td>
+                          <td className="w-100">
+                            <input
+                              type="text"
+                              className="oe_input"
+                              placeholder="Company name"
+                              disabled
+                            />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="oe_label">
+                            {" "}
+                            <label htmlhtmlFor="name">Other information</label>
+                          </td>
+                          <td className="w-100">
+                            <textarea
+                              type="text"
+                              disabled
+                              rows={4}
+                              className="oe_input"
+                              placeholder="other info"
+                            />
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <table class="oe_group oe_group_col_6 oe_inner_group">
+                      <tbody>
+                        <tr>
+                          <td class="oe_label">
+                            <label htmlFor="o_field_input_249" title="">
+                              Phone
+                            </label>
+                          </td>
+                          <td>
+                            <input
+                              class="oe_input"
+                              name="phone"
+                              type="text"
+                              placeholder="Phone number"
+                              disabled
+                              onChange={(e) =>
+                                setState({ ...state, phone: e.target.value })
+                              }
+                            />
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td class="oe_label">
+                            <label htmlFor="o_field_input_251">Email</label>
+                          </td>
+                          <td>
+                            <input
+                              class="oe_input"
+                              name="email"
+                              placeholder="Email address"
+                              type="email"
+                              value={user.email}
+                              disabled
+                            />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="oe_label">
+                            <label htmlFor="o_field_input_252">Web Site</label>
+                          </td>
+                          <td>
+                            <input
+                              class="oe_input"
+                              name="website"
+                              placeholder="e.g. www.zeslap.com"
+                              type="url"
+                              onChange={(e) =>
+                                setState({ ...state, website: e.target.value })
+                              }
+                              disabled
+                            />
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td class="oe_label">
+                            <label htmlFor="o_field_input_252">
+                              Facebook link
+                            </label>
+                          </td>
+                          <td>
+                            <input
+                              class="oe_input"
+                              name="facebook"
+                              placeholder="facebook link"
+                              type="text"
+                              disabled
+                              onChange={(e) =>
+                                setState({
+                                  ...state,
+                                  facebook_link: e.target.value,
+                                })
+                              }
+                            />
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="oe_label">
+                            <label htmlFor="o_field_input_252">Linkedin</label>
+                          </td>
+                          <td>
+                            <input
+                              class="oe_input"
+                              name="linkedin"
+                              placeholder="Linkedin link"
+                              onChange={(e) =>
+                                setState({
+                                  ...state,
+                                  linkedin_link: e.target.value,
+                                })
+                              }
+                              type="url"
+                              disabled
+                            />
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </>
+    )
+  );
 }

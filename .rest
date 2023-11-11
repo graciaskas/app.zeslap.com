@@ -1,0 +1,7 @@
+PUT http:localhost:8081/v1/users/64c78b0823f7e721eac472ec
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkthcyBHcmFjaWFzIFRtYiIsImlkIjoiNjRjNzhiMDgyM2Y3ZTcyMWVhYzQ3MmVjIiwicm9sZSI6InVzZXIiLCJpYXQiOjE2OTY4NDIxNTYsImV4cCI6MTY5Njg3MDk1Nn0.4I1at1JsyP5z0jR-fCwVLRy8ZgHObCiNRJlFKoYHo4c
+
+{
+    role:"admin"
+}

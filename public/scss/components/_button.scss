@@ -7,10 +7,10 @@
     }
 }
 .btn-group  {
-    font-family: 'Montserrat', sans-serif !important;
+   
     font-weight: normal !important;
     a.dropdown-toggle, a.btn {
-        font-family: 'Montserrat', sans-serif !important;
+        
         font-weight: normal !important;
     }
     .btn {
@@ -30,11 +30,7 @@
 }
 
 .btn {
-    // padding: 0.7rem 1.2rem !important;
-    // padding: 0.65em 0.938em !important;
-    padding: 0.6rem 0.9rem !important;
-    border-radius: 0.15rem !important;
-
+    font-size: inherit !important;
     &.bg-primary {
         color: white !important;
         span, i{
