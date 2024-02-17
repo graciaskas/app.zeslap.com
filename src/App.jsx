@@ -13,11 +13,11 @@ import Category from "./components/Categories";
 import Comment from "./components/Comment";
 
 import {
-	Link,
-	Route,
-	Routes,
-	useLocation,
-	useNavigate,
+  Link,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
 } from "react-router-dom";
 
 import "./css/bootstrap.min.css";
@@ -38,56 +38,52 @@ import { AuthContext } from "./contexts/AuthContext";
 import Toast from "./components/Toast";
 
 export default function App() {
-	const { user } = useContext(AuthContext);
-	const { loading, toast, log } = useContext(GlobalContext);
-	const { title, type, content } = toast;
+  const { user } = useContext(AuthContext);
+  const { loading, toast, log } = useContext(GlobalContext);
+  const { title, type, content } = toast;
 
-	useEffect(() => {
-		console.log(user?.role);
-	}, [user]);
+  return (
+    <div className="App">
+      <Navigation user={user} />
 
-	return (
-		<div className="App">
-			<Navigation user={user} />
+      {loading ? <Loader /> : null}
 
-			{loading ? <Loader /> : null}
+      <main className="main">
+        <Header user={user} />
+        {log ? <Toast title={title} type={type} content={content} /> : null}
 
-			<main className="main">
-				<Header user={user} />
-				{log ? <Toast title={title} type={type} content={content} /> : null}
+        <div className="main-content">
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            {user &&
+              (user.role === "admin" || (user && user.role === "author")) && (
+                <>
+                  <Route path="/blog/*" element={<Blog />} />
+                  <Route path="/comments/*" element={<Comment />} />
+                  <Route path="/categories/*" element={<Category />} />
+                </>
+              )}
+            <Route path="/users/*" element={<User />} />
+            {user && user.role === "admin" && (
+              <>
+                <Route path="/subscriptions/*" element={<Subscription />} />
+                <Route path="/newsletters/*" element={<NewsLetter />} />
+                <Route path="/contacts/*" element={<Contact />} />
+              </>
+            )}
 
-				<div className="main-content">
-					<Routes>
-						<Route path="/" element={<Dashboard />} />
-						{user &&
-							(user.role === "admin" || (user && user.role === "author")) && (
-								<>
-									<Route path="/blog/*" element={<Blog />} />
-									<Route path="/comments/*" element={<Comment />} />
-									<Route path="/categories/*" element={<Category />} />
-								</>
-							)}
-						<Route path="/users/*" element={<User />} />
-						{user && user.role === "admin" && (
-							<>
-								<Route path="/subscriptions/*" element={<Subscription />} />
-								<Route path="/newsletters/*" element={<NewsLetter />} />
-								<Route path="/contacts/*" element={<Contact />} />
-							</>
-						)}
-
-						<Route path="/logout/*" element={<LogOut />} />
-						<Route path="/payments/*" element={<Payment />} />
-						<Route path="/plans/*" element={<Plan />} />
-						<Route
-							path="*"
-							element={
-								<Error code={404} content={"Page can not be found..."} />
-							}
-						/>
-					</Routes>
-				</div>
-			</main>
-		</div>
-	);
+            <Route path="/logout/*" element={<LogOut />} />
+            <Route path="/payments/*" element={<Payment />} />
+            <Route path="/plans/*" element={<Plan />} />
+            <Route
+              path="*"
+              element={
+                <Error code={404} content={"Page can not be found..."} />
+              }
+            />
+          </Routes>
+        </div>
+      </main>
+    </div>
+  );
 }

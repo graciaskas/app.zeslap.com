@@ -18,10 +18,19 @@ function Blog(props) {
 
   const postContentRef = useRef(null);
 
-  useEffect(() => {
-    if (post) getPostComments(setPostComments, post.id);
-  }, [post]);
+  /**
+   * Archive post
+   * @param {*} post post identifier
+   * @returns :void
+   */
+  const actionArchivePost = (post) => {
+    if (!post) {
+      return;
+    }
+    alert("action archive invoked !");
+  };
 
+  //Get requested blog by ?blog={id} on initialise component
   useEffect(() => {
     if (!params.has("blog")) {
       setLog(true);
@@ -33,8 +42,15 @@ function Blog(props) {
       return;
     }
 
+    //Get post
     getPost(setPost, params.get("blog"));
   }, []);
+
+  //Get all related comments on change Blog ID
+  useEffect(() => {
+    if (post) getPostComments(setPostComments, post._id);
+    console.log(post);
+  }, [post]);
 
   return (
     post && (
@@ -54,28 +70,31 @@ function Blog(props) {
                 <i className="fa fa-user" />
               </div>
               <div style={{ marginLeft: "5px", marginTop: "-5px" }}>
-                <strong>{post.author_id[1]}</strong>
-                <small className="d-block" style={{ fontSize: ".75rem" }}>
+                <h4>
+                  <strong>{post.author_id[1]}</strong>
+                </h4>
+                {/* <small className="d-block" style={{ fontSize: ".75rem" }}>
                   Software developer.
-                </small>
+                </small> */}
               </div>
               {post.read ? (
-                <small className="position-absolute top-0 end-0 bg-secondary-light-7 rounded-pill px-2">
+                <small className="position-absolute top-0 end-0 bg-secondary-light-7 rounded-pill px-3 p-1">
                   Read
                 </small>
               ) : (
-                <small className="position-absolute top-0 end-0 bg-primary-light-7 rounded-pill px-2">
+                <small className="position-absolute top-0 end-0 bg-primary-light-7 rounded-pill px-3 p-1">
                   Not read
                 </small>
               )}
             </div>
 
             <div className="py-3">
-              <h5 className="mb-2 d-block"> {post.title} </h5>
+              <h4 className="mb-2 d-block"> {post.title} </h4>
               {/* Blog header */}
               <div>
                 <span>
-                  <i className="fa fa-calendar"></i> 12 jul 2022
+                  <i className="fa fa-calendar"></i>{" "}
+                  {new Date(post.createdAt).toLocaleString()}
                 </span>
                 <span style={{ marginLeft: "15px" }}>
                   <i className="fa fa-clipboard-list"></i>
@@ -85,8 +104,7 @@ function Blog(props) {
               {/* Blog image cover */}
               <div
                 style={{ height: "200px", overflow: "hidden" }}
-                className="mt-2"
-              >
+                className="mt-2">
                 <img
                   src={`${SITE_URL}/src/${post.cover}`}
                   alt="dds"
@@ -111,8 +129,7 @@ function Blog(props) {
                 <span className="fa fa-heart"></span>
                 <small
                   className="text-montserrat"
-                  style={{ marginLeft: "5px" }}
-                >
+                  style={{ marginLeft: "5px" }}>
                   {post.likes} Like(s)
                 </small>
               </div>
@@ -120,8 +137,7 @@ function Blog(props) {
                 <i className="fa fa-comments" />
                 <small
                   className="text-montserrat"
-                  style={{ marginLeft: "5px" }}
-                >
+                  style={{ marginLeft: "5px" }}>
                   {post.comments} Comment(s)
                 </small>
               </div>
@@ -131,11 +147,12 @@ function Blog(props) {
               <Link
                 to={`/blog/edit?blog=${post._id}`}
                 role={"button"}
-                className=" btn-sm bg-primary text-white rounded-pill"
-              >
+                className=" btn-sm bg-primary text-white rounded-pill">
                 <i className="fa fa-edit" /> Update content
               </Link>
-              <div className="btn-sm bg-danger text-white rounded-pill">
+              <div
+                className="btn-sm bg-danger text-white rounded-pill"
+                onClick={() => actionArchivePost(post._id)}>
                 <i className="fa fa-trash" /> Archive
               </div>
             </div>
@@ -149,17 +166,25 @@ function Blog(props) {
           </div>
           <div className="comments">
             {postComments.map((postComment) => (
-              <div class="comment d-flex align-items-start mt-3">
+              <div
+                class="comment d-flex align-items-start mt-3"
+                id={`${postComment._id}`}>
                 <div class="commenter bg-secondary icon_round">
                   <span class="text-white">GK</span>
                 </div>
                 <div class="w-100 " style={{ marginLeft: "7px" }}>
                   <h5>{postComment.commentor}</h5>
-                  <div className="bg-primary-light-9 py-2 px-3 rounded-pill">
-                    {postComment.comment}
-                  </div>
+                  <div
+                    className="bg-primary-light-9 p-3"
+                    style={{ borderRadius: "1rem" }}
+                    dangerouslySetInnerHTML={{
+                      __html: postComment.comment,
+                    }}></div>
                   <div className="d-flex justify-content-end">
-                    <small class="">2 Days ago.</small>
+                    <small class="mt-2">
+                      Commented on:
+                      {new Date(postComment.createdAt).toLocaleString()}
+                    </small>
                   </div>
                 </div>
               </div>

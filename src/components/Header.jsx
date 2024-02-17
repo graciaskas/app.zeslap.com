@@ -65,21 +65,18 @@ export default function Header({ user }) {
                   role="button"
                   id="dropdownProducts"
                   data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
+                  aria-expanded="false">
                   <i className="fa fa-user-circle"></i>
                   {user?.username}
                 </Link>
 
                 <ul
                   className="dropdown-menu  p-4 shadow-default border-0 rounded"
-                  aria-labelledby="dropdownProducts"
-                >
+                  aria-labelledby="dropdownProducts">
                   <li>
                     <Link
                       to={`/users/view?q=${user?.id}`}
-                      className="dropdown-itemx"
-                    >
+                      className="dropdown-itemx">
                       My profile
                     </Link>
                   </li>
@@ -103,12 +100,7 @@ export default function Header({ user }) {
 
       <header className="d-flex justify-content-between d-md-none align-items-center bg-white shadow-default p-2 d-flex  align-items-center">
         <div className="header__brand">
-          <img
-            src="https://zeslap.com/src/icon.png"
-            alt=""
-            srcset=""
-            width={100}
-          />
+          <img src="https://zeslap.com/src/icon.png" alt="" width={100} />
         </div>
 
         <ul className="header__icons d-flex align-items-center">
@@ -129,20 +121,18 @@ export default function Header({ user }) {
         <div
           role={"button"}
           style={{ cursor: "pointer" }}
-          onClick={(e) => setState({ ...style, display: "block" })}
-        >
+          onClick={(e) => setState({ ...style, display: "block" })}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            stroke-width="1.5"
+            strokeWidth="1.5"
             stroke="currentColor"
             width={35}
-            height={35}
-          >
+            height={35}>
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25"
             />
           </svg>
@@ -158,8 +148,7 @@ export default function Header({ user }) {
               {user && user.role === "admin" && (
                 <Link
                   to="/contacts/?view=th"
-                  className="d-flex align-items-center"
-                >
+                  className="d-flex align-items-center">
                   <i className="fas fa-envelope"></i>
                   <span className="text-decoration-none t-white">
                     Site contacts
@@ -172,8 +161,7 @@ export default function Header({ user }) {
               {user && user.role === "admin" && (
                 <Link
                   to="/newsletters/?view=list"
-                  className="d-flex align-items-center"
-                >
+                  className="d-flex align-items-center">
                   <i className="fas fa-at "></i>
                   <span className="text-decoration-none">Newsletters</span>
                   <i className="badge rounded-pill bg-orange float-right">05</i>
@@ -182,8 +170,7 @@ export default function Header({ user }) {
               {user && user.role === "admin" && (
                 <Link
                   to="/users/?view=th"
-                  className="d-flex align-items-center"
-                >
+                  className="d-flex align-items-center">
                   <i className="fas fa-users "></i>
                   <span className="text-decoration-none t-white">Users</span>
                   <i className="badge rounded-pill bg-primary float-right">
@@ -198,15 +185,13 @@ export default function Header({ user }) {
                     <Link
                       data-bs-toggle="collapse"
                       to={"#multiCollapseExample1"}
-                      className="collapse-item d-block w-100"
-                    >
+                      className="collapse-item d-block w-100">
                       <i className="fas fa-blog "></i>
                       <span className="text-decoration-none t-white">Post</span>
                     </Link>
                     <div
                       className="collapse multi-collapse bg-secondary-dark-2 rounded"
-                      id="multiCollapseExample1"
-                    >
+                      id="multiCollapseExample1">
                       {/* <Link to="/blog/?view=th" className="d-flex align-items-center">
 									<i className="fas fa-columns"></i>
 									<span className="text-decoration-none t-white">
@@ -215,8 +200,7 @@ export default function Header({ user }) {
 								</Link> */}
                       <Link
                         to="/blog/blogs/?view=th"
-                        className="d-flex align-items-center active"
-                      >
+                        className="d-flex align-items-center active">
                         <i className="fas fa-blog "></i>
                         <span className="text-decoration-none t-white">
                           Posts
@@ -227,8 +211,7 @@ export default function Header({ user }) {
                       </Link>
                       <Link
                         to="/comments/?view=th"
-                        className="d-flex align-items-center"
-                      >
+                        className="d-flex align-items-center">
                         <i className="fas fa-blog "></i>
                         <span className="text-decoration-none t-white">
                           Comments
@@ -239,8 +222,7 @@ export default function Header({ user }) {
                       </Link>
                       <Link
                         to="/categories/?view=th"
-                        className="d-flex align-items-center"
-                      >
+                        className="d-flex align-items-center">
                         <i className="fas fa-blog "></i>
                         <span className="text-decoration-none t-white">
                           Categories
@@ -256,8 +238,7 @@ export default function Header({ user }) {
               {user && user.role === "admin" && (
                 <Link
                   to="/subscriptions/?view=list"
-                  className="d-flex align-items-center"
-                >
+                  className="d-flex align-items-center">
                   <i className="fas fa-at "></i>
                   <span className="text-decoration-none">Subscriptions</span>
                   <i className="badge rounded-pill bg-orange float-right">05</i>
@@ -283,29 +264,25 @@ export default function Header({ user }) {
                   role="button"
                   id="dropdownProducts"
                   data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
+                  aria-expanded="false">
                   <i className="fa fa-user-circle"></i>
                   {user?.username}
                 </Link>
 
                 <ul
                   className="dropdown-menu  p-4 shadow-default border-0 rounded"
-                  aria-labelledby="dropdownProducts"
-                >
+                  aria-labelledby="dropdownProducts">
                   <li>
                     <Link
                       to={`/users/view?q=${user?.id}`}
-                      className="dropdown-itemx text-secondary"
-                    >
+                      className="dropdown-itemx text-secondary">
                       My profile
                     </Link>
                   </li>
                   <li>
                     <Link
                       to="/preferences"
-                      className="dropdown-itemx text-secondary"
-                    >
+                      className="dropdown-itemx text-secondary">
                       My Preferences
                     </Link>
                   </li>
@@ -313,8 +290,7 @@ export default function Header({ user }) {
                   <li>
                     <Link
                       to="/logout"
-                      className="dropdown-itemx text-secondary"
-                    >
+                      className="dropdown-itemx text-secondary">
                       <i className="fa fa-times-circle" /> Log Out
                     </Link>
                   </li>
@@ -325,19 +301,17 @@ export default function Header({ user }) {
           <div
             className="navigation__closer"
             style={navCloser}
-            onClick={closeNavigation}
-          >
+            onClick={closeNavigation}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              strokeWidth="1.5"
               stroke="currentColor"
-              width={35}
-            >
+              width={35}>
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 d="M6 18L18 6M6 6l12 12"
               />
             </svg>

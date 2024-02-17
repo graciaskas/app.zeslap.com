@@ -24,8 +24,7 @@ export default function Navigation({ user }) {
         {user && user.role === "admin" && (
           <Link
             to="/newsletters/?view=list"
-            className="d-flex align-items-center"
-          >
+            className="d-flex align-items-center">
             <i className="fas fa-at "></i>
             <span className="text-decoration-none">Newsletters</span>
             <i className="badge rounded-pill bg-orange float-right">05</i>
@@ -45,15 +44,13 @@ export default function Navigation({ user }) {
               <Link
                 data-bs-toggle="collapse"
                 to={"#multiCollapseExample1"}
-                className="collapse-item d-block w-100"
-              >
+                className="collapse-item d-block w-100">
                 <i className="fas fa-blog "></i>
                 <span className="text-decoration-none t-white">Post</span>
               </Link>
               <div
                 className="collapse multi-collapse bg-secondary-dark-2 rounded"
-                id="multiCollapseExample1"
-              >
+                id="multiCollapseExample1">
                 {/* <Link to="/blog/?view=th" className="d-flex align-items-center">
 									<i className="fas fa-columns"></i>
 									<span className="text-decoration-none t-white">
@@ -62,8 +59,7 @@ export default function Navigation({ user }) {
 								</Link> */}
                 <Link
                   to="/blog/blogs/?view=th"
-                  className="d-flex align-items-center active"
-                >
+                  className="d-flex align-items-center active">
                   <i className="fas fa-blog "></i>
                   <span className="text-decoration-none t-white">Posts</span>
                   <i className="badge rounded-pill bg-warning float-right">
@@ -72,8 +68,7 @@ export default function Navigation({ user }) {
                 </Link>
                 <Link
                   to="/comments/?view=th"
-                  className="d-flex align-items-center"
-                >
+                  className="d-flex align-items-center">
                   <i className="fas fa-blog "></i>
                   <span className="text-decoration-none t-white">Comments</span>
                   <i className="badge rounded-pill bg-success-dark-3 float-right">
@@ -82,8 +77,7 @@ export default function Navigation({ user }) {
                 </Link>
                 <Link
                   to="/categories/?view=th"
-                  className="d-flex align-items-center"
-                >
+                  className="d-flex align-items-center">
                   <i className="fas fa-blog "></i>
                   <span className="text-decoration-none t-white">
                     Categories
@@ -97,8 +91,7 @@ export default function Navigation({ user }) {
         {user && user.role === "admin" && (
           <Link
             to="/subscriptions/?view=list"
-            className="d-flex align-items-center"
-          >
+            className="d-flex align-items-center">
             <i className="fas fa-at "></i>
             <span className="text-decoration-none">Subscriptions</span>
             <i className="badge rounded-pill bg-orange float-right">05</i>
