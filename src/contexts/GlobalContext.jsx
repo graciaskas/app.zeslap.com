@@ -54,13 +54,13 @@ export default function GlobalProvider({ children }) {
       });
       const json = await res.json();
       setLoading(false);
-
-      res.status === 200
-        ? setPosts(json.data)
-        : setToast({
-            ...toast,
-            content: json.message,
-          });
+      if (!json.error) {
+        return setPosts(json.data);
+      }
+      setToast({
+        ...toast,
+        content: json.message,
+      });
     } catch (error) {
       setLog(true);
       setLoading(false);

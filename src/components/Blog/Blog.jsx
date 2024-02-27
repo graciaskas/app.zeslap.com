@@ -6,28 +6,52 @@ import Error from "../Error";
 import Toast from "../Toast";
 import Keyboard from "../Keyboard";
 import { useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "../../css/ckeditor.css";
+import { AuthContext } from "../../contexts/AuthContext";
 
 function Blog(props) {
   const [post, setPost] = useState(null);
   const [postComments, setPostComments] = useState([]);
-  const { SITE_URL, getPost, getPostComments, params, setLog, setToast } =
-    useContext(GlobalContext);
+  const {
+    SITE_URL,
+    BASE_URI,
+    getPost,
+    getPostComments,
+    params,
+    setLog,
+    setToast,
+  } = useContext(GlobalContext);
+  const { token } = useContext(AuthContext);
 
   const postContentRef = useRef(null);
+  const navigate = useNavigate();
 
   /**
    * Archive post
    * @param {*} post post identifier
    * @returns :void
    */
-  const actionArchivePost = (post) => {
+  const actionArchivePost = async (post) => {
     if (!post) {
       return;
     }
-    alert("action archive invoked !");
+    try {
+      const response = await fetch(BASE_URI + "/posts/" + post, {
+        method: "delete",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      });
+      const { error, message } = await response();
+      if (!error) {
+        return navigate("/blog/blogs");
+      }
+      alert(error, message);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   //Get requested blog by ?blog={id} on initialise component
@@ -106,7 +130,7 @@ function Blog(props) {
                 style={{ height: "200px", overflow: "hidden" }}
                 className="mt-2">
                 <img
-                  src={`${SITE_URL}/src/${post.cover}`}
+                  src={`${SITE_URL}/uploads/${post.cover}`}
                   alt="dds"
                   style={{
                     objectFit: "fill",

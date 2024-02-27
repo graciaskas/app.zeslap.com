@@ -22,7 +22,7 @@ export default function BlogCard(props) {
       className="shadow-default rounded p-2  bg-white mb-3 d-block text-secondary">
       <div className="d-flex border-bottom pb-2 position-relative">
         <img
-          src="/img/user_profile.png"
+          src="/img/_q.jpg"
           alt=""
           style={{ width: "2.5rem", height: "2.5rem" }}
           className="rounded-circle bs-primary-2"
@@ -41,32 +41,39 @@ export default function BlogCard(props) {
         </small>
       </div>
 
-      <div className="py-3">
-        <div style={{ height: 150, overflow: "hidden" }}>
-          <img src={`${SITE_URL}/uploads/${post.cover}`} alt="dds" />
+      <div className="row">
+        <div className="col-md-4">
+          <div style={{ height: 150, overflow: "hidden" }}>
+            <img src={`${SITE_URL}/uploads/${post.cover}`} alt="dds" />
+          </div>
         </div>
-        <h5 className="my-2">
-          {post.title && post.title.substring(0, 110) + "..."}
-        </h5>
+        <div className="col-md-8">
+          <h5 className="my-2">
+            {post.title && post.title.substring(0, 150) + "..."}
+          </h5>
+          <p>{post.description}</p>
 
-        <div className="mt-2">
-          <i className="fa fa-clipboard-list" style={{ marginRight: "7px" }} />
-          {post.category_id[1]}
-        </div>
-      </div>
-
-      <div className="d-flex align-items-center  border-top pt-2">
-        <div className="d-flex align-items-center">
-          <span className="fa fa-heart text-white bg-primary rounded-pill px-1"></span>
-          <small className="text-montserrat" style={{ marginLeft: "5px" }}>
-            {post.likes} Like(s)
-          </small>
-        </div>
-        <div style={{ marginLeft: "15px" }}>
-          <i className="fa fa-comments" />
-          <small className="text-montserrat" style={{ marginLeft: "5px" }}>
-            {post.comments} Comment(s)
-          </small>
+          <div className="mt-2">
+            <i
+              className="fa fa-clipboard-list"
+              style={{ marginRight: "7px" }}
+            />
+            {post.category_id[1]}
+          </div>
+          <div className="d-flex align-items-center  border-top pt-2">
+            <div className="d-flex align-items-center">
+              <span className="fa fa-heart text-white bg-primary rounded-pill px-1"></span>
+              <small className="text-montserrat" style={{ marginLeft: "5px" }}>
+                {post.likes} Like(s)
+              </small>
+            </div>
+            <div style={{ marginLeft: "15px" }}>
+              <i className="fa fa-comments" />
+              <small className="text-montserrat" style={{ marginLeft: "5px" }}>
+                {post.comments} Comment(s)
+              </small>
+            </div>
+          </div>
         </div>
       </div>
     </Link>
