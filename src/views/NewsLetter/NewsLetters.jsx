@@ -86,7 +86,7 @@ function NewsLetters(props) {
   ];
 
   return (
-    <div className="container position-relative">
+    <div className="container relative">
       <div className="row">
         <AppBar
           data={[]}

@@ -1,5 +1,5 @@
 .btn {
-  @apply py-2 px-3 rounded-md;
+  @apply py-2 px-3 rounded-[.2rem];
   @apply text-center;
   &:focus {
     overflow: hidden;

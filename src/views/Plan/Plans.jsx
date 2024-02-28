@@ -33,7 +33,7 @@ export default function Plans() {
 
   //Component default return
   return (
-    <div className="container position-relative">
+    <div className="container relative">
       <div className="row">
         <AppBar data={plans} appName="Plans" viewTypes={["list"]} />
 

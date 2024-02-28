@@ -1,6 +1,5 @@
 @import "./reset";
 @import "./utilities";
-@import "./components/alert";
 @import "./components/button";
 @import "./components/dropdown";
 @import "./components/input";
@@ -53,23 +52,6 @@
 }
 .form__login .block__form form {
   width: 100%;
-}
-.form__login .block__form form input[type="radio"] {
-  padding: 0;
-}
-
-.form__login .block__form form .signup__socials {
-  display: flex;
-  margin: auto;
-  width: 25%;
-  text-align: center;
-}
-
-.form__login .block__form form .signup__socials span {
-  background-color: #1da1f2;
-  color: #1da1f2;
-  fill: #fff;
-  margin: 0 5px;
 }
 
 .App {

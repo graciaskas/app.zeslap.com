@@ -6,7 +6,7 @@ export default function Contact({ contact }) {
 
   return (
     <div className="rounded p-4 bg-white border mb-3">
-      <div className="flex border-bottom position-relative pb-2">
+      <div className="flex border-bottom relative pb-2">
         <div className="icon_round bg-secondary text-white">
           <i className="fa fa-user" />
         </div>
@@ -17,11 +17,11 @@ export default function Contact({ contact }) {
           </small>
         </div>
         {read ? (
-          <small className="position-absolute top-0 end-0 bg-secondary-light-7 rounded-pill px-2">
+          <small className="absolute top-0 end-0 bg-secondary-light-7 rounded-pill px-2">
             Read
           </small>
         ) : (
-          <small className="position-absolute top-0 end-0 bg-primary-light-7 rounded-pill px-2">
+          <small className="absolute top-0 end-0 bg-primary-light-7 rounded-pill px-2">
             Not read
           </small>
         )}

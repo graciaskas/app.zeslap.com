@@ -89,7 +89,7 @@ function Blog(props) {
 
         <form className="mt-3 p-3 bg-white rounded shadow-default contact-form">
           <div className="border rounded p-4">
-            <div className="flex border-bottom position-relative pb-2">
+            <div className="flex border-bottom relative pb-2">
               <div className="icon_round bg-secondary text-white">
                 <i className="fa fa-user" />
               </div>
@@ -102,11 +102,11 @@ function Blog(props) {
                 </small> */}
               </div>
               {post.read ? (
-                <small className="position-absolute top-0 end-0 bg-secondary-light-7 rounded-pill px-3 p-1">
+                <small className="absolute top-0 end-0 bg-secondary-light-7 rounded-pill px-3 p-1">
                   Read
                 </small>
               ) : (
-                <small className="position-absolute top-0 end-0 bg-primary-light-7 rounded-pill px-3 p-1">
+                <small className="absolute top-0 end-0 bg-primary-light-7 rounded-pill px-3 p-1">
                   Not read
                 </small>
               )}

@@ -67,7 +67,7 @@ export default function Users() {
 
   //Component default return
   return (
-    <div className="container position-relative">
+    <div className="container relative">
       <div className="row">
         <AppBar data={users} appName="Users" viewTypes={["th", "list"]} />
 

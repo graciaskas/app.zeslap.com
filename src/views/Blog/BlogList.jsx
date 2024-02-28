@@ -20,7 +20,7 @@ export default function BlogCard(props) {
     <Link
       to={"/blog/view?blog=" + post._id}
       className="shadow-default rounded p-2  bg-white mb-3 block text-secondary">
-      <div className="flex border-bottom pb-2 position-relative">
+      <div className="flex border-bottom pb-2 relative">
         <img
           src="/img/_q.jpg"
           alt=""
@@ -36,7 +36,7 @@ export default function BlogCard(props) {
             {new Date(post.createdAt).toLocaleString()}
           </small>
         </div>
-        <small className="bg-primary text-white px-2 rounded-pill position-absolute top-0 end-0">
+        <small className="bg-primary text-white px-2 rounded-pill absolute top-0 end-0">
           Posted
         </small>
       </div>

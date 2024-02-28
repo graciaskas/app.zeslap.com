@@ -247,7 +247,7 @@ export default function Create() {
                           </div>
                         </div>
 
-                        <div className="col-md-6 col-12 position-relative">
+                        <div className="col-md-6 col-12 relative">
                           <div className="input-group border  w-100 mt-2">
                             <span
                               className="input-group-text"
@@ -266,7 +266,7 @@ export default function Create() {
                           </div>
                           {selecting && (
                             <div
-                              className="input-select position-absolute bg-white shadow-default p-3 rounded"
+                              className="input-select absolute bg-white shadow-default p-3 rounded"
                               style={{
                                 zIndex: 10,
                                 overflow: "hidden",

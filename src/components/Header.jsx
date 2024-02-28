@@ -35,26 +35,26 @@ export default function Header({ user }) {
 
   return (
     <>
-      <header className="main-header bg-white shadow-default p-2 d-none d-mflex  items-center">
+      <header className="app__header bg-white shadow-default p-2 hidden md:flex  items-center">
         <div className="container-lg">
           <div className="flex justify-between items-center">
             <form action="" className="w-50 rounded-pill bg-gray">
               <input
-                type="text"
+                type="search"
                 placeholder="Search"
-                className="w-100 bg-gray rounded-pill"
+                className="w-100 bg-gray rounded-md w-full"
               />
             </form>
             <nav className="header__icons flex items-center justify-center">
-              <li className="header__icon  position-relative  px-2 bg-gray rounded-pill">
+              <li className="header__icon  relative  px-2 bg-gray rounded-pill">
                 <i className="fa fa-comments"></i>
-                <span className="position-absolute bottom-0 start-100 translate-middle badge rounded-pill bg-warning">
+                <span className="absolute bottom-0 start-100 translate-middle badge rounded-pill bg-warning">
                   05
                 </span>
               </li>
-              <li className="header__icon  position-relative mx-5 px-2 bg-gray rounded-pill">
+              <li className="header__icon  relative mx-5 px-2 bg-gray rounded-pill">
                 <i className="fa fa-bell"></i>
-                <span className="position-absolute bottom-0 start-100 translate-middle badge rounded-pill bg-orange">
+                <span className="absolute bottom-0 start-100 translate-middle badge rounded-pill bg-orange">
                   05
                 </span>
               </li>
@@ -98,21 +98,21 @@ export default function Header({ user }) {
         </div>
       </header>
 
-      <header className="flex justify-between d-md-none items-center bg-white shadow-default p-2 flex  items-center">
+      <header className="app__header__mobile lg:hiddden md:hidden flex justify-between  items-center bg-white shadow-default p-2">
         <div className="header__brand">
           <img src="https://zeslap.com/src/icon.png" alt="" width={100} />
         </div>
 
         <ul className="header__icons flex items-center">
-          <li className="header__icon  position-relative  px-2 bg-gray rounded-pill">
+          <li className="header__icon  relative  px-2 bg-gray rounded-pill">
             <i className="fa fa-comments"></i>
-            <span className="position-absolute bottom-0 start-100 translate-middle badge rounded-pill bg-warning">
+            <span className="absolute bottom-0 start-100 translate-middle badge rounded-pill bg-warning">
               05
             </span>
           </li>
-          <li className="header__icon  position-relative mx-5 px-2 bg-gray rounded-pill">
+          <li className="header__icon  relative mx-5 px-2 bg-gray rounded-pill">
             <i className="fa fa-bell"></i>
-            <span className="position-absolute bottom-0 start-100 translate-middle badge rounded-pill bg-orange">
+            <span className="absolute bottom-0 start-100 translate-middle badge rounded-pill bg-orange">
               05
             </span>
           </li>

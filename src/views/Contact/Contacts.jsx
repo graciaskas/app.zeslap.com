@@ -57,7 +57,7 @@ function Main(props) {
   }
 
   return (
-    <div className="container position-relative">
+    <div className="container relative">
       <div className="row">
         <AppBar data={contacts} appName="Contacts" viewTypes={["th", "list"]} />
 

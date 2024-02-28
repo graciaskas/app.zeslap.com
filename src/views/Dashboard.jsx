@@ -71,12 +71,11 @@ export default function Dashboard() {
 
   return (
     <div className="container-lg">
-      <div className="grid">
-        <div className="w-full">
-          <h2>Hello {user && user.username}</h2>
-          <p>We are happy to see you again...</p>
-        </div>
-
+      <div className="w-full">
+        <h2>Hello {user && user.username}</h2>
+        <p>We are happy to see you again...</p>
+      </div>
+      <div className="grid grid-col lg:grid-cols-3 gap-5">
         <div className="col-lg-4 col-md-6 col-12">
           <div className="border-bottom bg-white shadow-default rounded mb-3">
             <div className="modal-header">
@@ -199,7 +198,9 @@ export default function Dashboard() {
             </div>
           </div>
         </div>
+      </div>
 
+      <div>
         {user?.role !== "user" && (
           <div className="col-12 mb-3">
             <div className="p-3 bg-white rounded shadow-default">
