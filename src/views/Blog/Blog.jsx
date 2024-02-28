@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
 
 import { GlobalContext } from "../../contexts/GlobalContext";
-import AppBar from "../AppBar";
-import Error from "../Error";
-import Toast from "../Toast";
-import Keyboard from "../Keyboard";
+import AppBar from "../../components/AppBar";
+import Error from "../../components/Error";
+import Toast from "../../components/Toast";
+import Keyboard from "../../components/Keyboard";
 import { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 

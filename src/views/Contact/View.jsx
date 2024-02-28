@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
 import PropTypes from "prop-types";
 import { GlobalContext } from "../../contexts/GlobalContext";
-import AppBar from "../AppBar";
-import Error from "../Error";
-import Toast from "../Toast";
+import AppBar from "../../components/AppBar";
+import Error from "../../components/Error";
+import Toast from "../../components/Toast";
 
-import Editor from "../Editor";
+import Editor from "../../components/Editor";
 
 function View(props) {
   const [contact, setContact] = useState(null);

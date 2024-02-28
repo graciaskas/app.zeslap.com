@@ -1,31 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
+import { getToken, parseJwt } from "../utilities/utilities";
+
 export const destUrl =
   process.env.REACT_APP_MODE === "production"
     ? "https://zeslap.com/login"
     : "http://localhost:8082/login";
 
 export const AuthContext = React.createContext();
-
-const parseJwt = (token) => {
-  try {
-    return JSON.parse(atob(token.split(".")[1]));
-  } catch (e) {
-    return null;
-  }
-};
-
-const getToken = () => {
-  try {
-    let client = window.localStorage.getItem("zeslap-user");
-    if (!client) return null;
-    client = JSON.parse(client);
-    return client["zeslap_key"];
-  } catch (error) {
-    throw Error(error);
-  }
-};
 
 /**
  * Authentication provider for the app
@@ -63,7 +46,7 @@ export default function AuthProvider({ children }) {
 
     //Check user and token not expired
     if (!user || user.exp * 1000 < Date.now()) {
-      return (window.location.href = destUrl);
+      // return (window.location.href = destUrl);
     }
 
     setState({ authenticated: true, user });

@@ -2,11 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import { useContext } from "react";
 import { Link, useNavigate, useNavigation } from "react-router-dom";
 
-import AppBarCreate from "../AppBarCreate";
-import Keyboard from "../Keyboard";
+import AppBarCreate from "../../components/AppBarCreate";
+import Keyboard from "../../components/Keyboard";
 import { GlobalContext } from "../../contexts/GlobalContext";
-import Toast from "../Toast";
-import Editor from "../Editor";
+import Toast from "../../components/Toast";
+import Editor from "../../components/Editor";
 import { AuthContext } from "../../contexts/AuthContext";
 
 const imgDefault = "/img/user_icon.png";

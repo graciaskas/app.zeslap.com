@@ -1,16 +1,4 @@
-import React, { useEffect, useState } from "react";
-
-//import components
-import Navigation from "./components/Navigation";
-import Dashboard from "./components/Dashboard";
-import Blog from "./components/Blog";
-import User from "./components/User";
-import NewsLetter from "./components/NewsLetter";
-import Subscription from "./components/Subscription";
-import Contact from "./components/Contact";
-import Error from "./components/Error";
-import Category from "./components/Categories";
-import Comment from "./components/Comment";
+import React, { useEffect, useState, useContext } from "react";
 
 import {
   Link,
@@ -20,33 +8,50 @@ import {
   useNavigate,
 } from "react-router-dom";
 
-// import "./css/bootstrap.min.css";
-// import "./css/all.min.css";
-// import "./css/main.min.css";
-import "./css/style.min.css";
-
+//import views
+import Navigation from "./components/Navigation";
+import Error from "./components/Error";
 import Header from "./components/Header";
 import Loader from "./components/Loader";
-import { useContext } from "react";
-import { GlobalContext } from "./contexts/GlobalContext";
-
+import Toast from "./components/Toast";
 import LogOut from "./components/LogOut";
 
-import Payment from "./components/Payment";
-import Plan from "./components/Plan";
-import { AuthContext } from "./contexts/AuthContext";
-import Toast from "./components/Toast";
 import Login from "./views/Login";
+import Dashboard from "./views/Dashboard";
+import Blog from "./views/Blog";
+import User from "./views/User";
+import NewsLetter from "./views/NewsLetter";
+import Subscription from "./views/Subscription";
+import Contact from "./views/Contact";
+import Payment from "./views/Payment";
+import Plan from "./views/Plan";
+import Category from "./views/Categories";
+import Comment from "./views/Comment";
+
+import "./css/all.min.css";
+import "./css/style.min.css";
+
+import { GlobalContext } from "./contexts/GlobalContext";
+
+import { AuthContext } from "./contexts/AuthContext";
+
+import { getToken, parseJwt } from "./utilities/utilities";
 
 export default function App() {
-  // const { user } = useContext(AuthContext);
-  // const { loading = false, toast, log } = useContext(GlobalContext);
-  const { loading = false, toast, log } = {};
-  // const { title, type, content } = toast;
-  const user = { name: "Gracias Kasongo", id: "xgh67hHDY4" };
-  const { title, type, content } = {};
+  const {
+    loading = false,
+    title,
+    type,
+    log,
+    content,
+  } = useContext(GlobalContext);
+  const token = getToken();
 
-  return <Login />;
+  if (!token) {
+    return <Login />;
+  }
+
+  const user = parseJwt(token);
 
   return (
     <div className="App">

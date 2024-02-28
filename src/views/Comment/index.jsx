@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import NewDocument from "../NewDocument";
-import AppBar from "../AppBar";
+import NewDocument from "../../components/NewDocument";
+import AppBar from "../../components/AppBar";
 import { GlobalContext } from "../../contexts/GlobalContext";
 import { useEffect } from "react";
 import { useContext } from "react";

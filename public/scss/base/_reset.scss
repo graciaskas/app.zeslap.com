@@ -126,17 +126,6 @@ img {
   pointer-events: none;
 }
 
-input:not([type="radio"], [type="checkbox"]),
-button,
-select:not(.form-control-sm),
-textarea {
-  padding: 0.3rem 0.7rem !important;
-  border: 1px solid transparent;
-  border-radius: 0.2em !important;
-  outline: none;
-  font-size: inherit !important;
-}
-
 select {
   outline: none;
   // border: none;

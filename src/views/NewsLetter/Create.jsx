@@ -2,11 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-import AppBarCreate from "../AppBarCreate";
+import AppBarCreate from "../../components/AppBarCreate";
 
 import { GlobalContext } from "../../contexts/GlobalContext";
-import Toast from "../Toast";
-import Editor from "../Editor";
+import Toast from "../../components/Toast";
+import Editor from "../../components/Editor";
 
 export default function Create() {
   const { BASE_URI, headers, toast, setToast, setLoading, setLog } =

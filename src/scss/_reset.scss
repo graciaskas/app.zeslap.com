@@ -11,7 +11,7 @@ $colors: (
   "danger": #dc3545,
   "odoo": #714b67,
   "white": #fff,
-  "gray": #f8fbfc,
+  "gray": #f7f4f4,
   "transparent": transparent,
 );
 
@@ -43,29 +43,38 @@ body {
     "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
     sans-serif, sans-serif;
   color: map-get($colors, "secondary");
-  font-size: 0.95em;
+  font-size: 1rem;
   overflow-x: hidden;
   background-color: map-get($colors, "gray");
 }
 
 h1 {
   font-size: 2.35em;
+  @apply font-bold;
 }
 
 h2 {
   font-size: 2em;
+  @apply font-bold;
 }
 
 h3 {
   font-size: 1.688em;
+  @apply font-bold;
 }
 
 h4 {
   font-size: 1.375em;
+  @apply font-bold;
 }
 
 h5 {
   font-size: 1.1em;
+  @apply font-bold;
+}
+
+h6 {
+  @apply font-bold;
 }
 
 @media (max-width: 768px) {
@@ -97,18 +106,6 @@ li {
 a {
   text-decoration: none;
   color: var(--primary);
-  &:hover {
-    color: var(--primary);
-  }
-  &.btn {
-    font-family: "Raleway", system-ui, -apple-system, BlinkMacSystemFont,
-      "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
-      "Helvetica Neue", sans-serif;
-  }
-}
-
-a:not(.btn) {
-  font-weight: normal !important;
 }
 
 a:visited {
@@ -125,9 +122,8 @@ input:not([type="radio"], [type="checkbox"]),
 button,
 select:not(.form-control-sm),
 textarea {
-  padding: 0.75em 0.938em !important;
-  border: 1px solid transparent !important;
-  border-radius: 0.15em !important;
+  @apply py-3 px-4 rounded-sm;
+  border: 1px solid transparent;
   outline: none;
 }
 

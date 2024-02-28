@@ -11,9 +11,9 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     {/* <AuthProvider> */}
-    {/* <GlobalProvider> */}
-    <App />
-    {/* </GlobalProvider> */}
+    <GlobalProvider>
+      <App />
+    </GlobalProvider>
     {/* </AuthProvider> */}
   </BrowserRouter>
 );

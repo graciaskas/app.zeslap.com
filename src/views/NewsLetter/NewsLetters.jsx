@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 
-import AppBar from "../AppBar";
+import AppBar from "../../components/AppBar";
 
 import { GlobalContext } from "../../contexts/GlobalContext";
 import { useNavigate } from "react-router-dom";

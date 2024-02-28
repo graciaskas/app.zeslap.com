@@ -4,11 +4,11 @@ import { useState } from "react";
 import { useEffect } from "react";
 
 import { GlobalContext } from "../../contexts/GlobalContext";
-import AppBarCreate from "../AppBarCreate";
-import Error from "../Error";
-import Toast from "../Toast";
-import ChangePwd from "../Modals/ChangePwd";
-import Base from "../../utils/base";
+import AppBarCreate from "../../components/AppBarCreate";
+import Error from "../../components/Error";
+import Toast from "../../components/Toast";
+import ChangePwd from "../../components/Modals/ChangePwd";
+import Base from "../../utilities/base";
 import { Link } from "react-router-dom";
 
 export default function View() {
@@ -89,8 +89,7 @@ export default function View() {
                     type="button"
                     className="btn bg-primary"
                     style={{ marginRight: "7px" }}
-                    onClick={(e) => setEditing(false)}
-                  >
+                    onClick={(e) => setEditing(false)}>
                     Modify
                   </button>
                 )}
@@ -98,8 +97,7 @@ export default function View() {
                   <button
                     type="submit"
                     className="btn bg-primary"
-                    style={{ marginRight: "7px" }}
-                  >
+                    style={{ marginRight: "7px" }}>
                     Save
                   </button>
                 )}
@@ -152,8 +150,7 @@ export default function View() {
                     <div
                       role="button"
                       data-bs-toggle="modal"
-                      data-bs-target="#changePwdModal"
-                    >
+                      data-bs-target="#changePwdModal">
                       <span class="d-block">Change password</span>
                     </div>
                   </div>
@@ -187,8 +184,7 @@ export default function View() {
                       <label
                         htmlFor="personnal"
                         class="form-check-label"
-                        className="mx-2"
-                      >
+                        className="mx-2">
                         Personnal account
                       </label>
                     </div>
@@ -198,8 +194,7 @@ export default function View() {
                       <label
                         htmlFor="company"
                         class="form-check-label"
-                        className="mx-2"
-                      >
+                        className="mx-2">
                         Company account
                       </label>
                     </div>

@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { AuthContext } from "./AuthContext";
 import axios from "axios";
+import { getToken } from "../utilities/utilities";
 
 const SITE_URL =
   process.env.REACT_APP_MODE === "production"
@@ -16,7 +17,7 @@ export const BASE_URI =
 export const GlobalContext = React.createContext();
 
 export default function GlobalProvider({ children }) {
-  const { token } = useContext(AuthContext);
+  const token = getToken();
 
   //*** App data
   const [posts, setPosts] = useState([]);

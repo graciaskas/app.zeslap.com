@@ -1,54 +1,10 @@
-.btn-sm {
-    padding: .375rem 1.2rem !important;;
-    border-radius: 0.15rem !important;
-    &:focus {
-        overflow: hidden;
-        outline: none;
-        border: none;
-        box-shadow: none;
-    }
-}
-
 .btn {
-    padding: 0.75rem 1.2rem !important;
-    border-radius: 0.15rem !important;
-
-    &:focus {
-        overflow: hidden;
-        outline: none;
-        border: none;
-        box-shadow: none;
-    }
-
-    &.bg-primary {
-        color: white !important;
-        span, i{
-            color: var(--white) !important;
-        }
-        &:active {
-            background-color: mix(black, map-get($colors, 'primary'), 15) !important;
-        }
-    }
-
-    &.bg-secondary, 
-    &.bg-danger,
-    &.bg-success {
-        color: white !important;
-        span,i {
-            color: var(--white) !important;
-        }
-        &:active {
-            background-color: mix(white, map-get($colors, 'secondary'), 15) !important;
-        }
-    }
-
-    &.button-loader {
-        position: relative;
-        i {
-            position: absolute;
-            top: 5px;
-            left: 7px;
-            font-size: 25px;
-        }
-    }
+  @apply py-2 px-3 rounded-md;
+  @apply text-center;
+  &:focus {
+    overflow: hidden;
+    outline: none;
+    border: none;
+    box-shadow: none;
+  }
 }

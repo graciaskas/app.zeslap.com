@@ -4,12 +4,12 @@ import { useState } from "react";
 import { useContext } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { GlobalContext } from "../../contexts/GlobalContext";
-import AppBar from "../AppBar";
-import Error from "../Error";
-import Toast from "../Toast";
+import AppBar from "../../components/AppBar";
+import Error from "../../components/Error";
+import Toast from "../../components/Toast";
 import Blog from "./BlogCard";
 import BlogList from "./BlogList";
-import NewDocument from "../NewDocument";
+import NewDocument from "../../components/NewDocument";
 
 export default function Blogs() {
   const { params, getPosts, posts } = useContext(GlobalContext);

@@ -1,23 +1,32 @@
 @import "./reset";
 @import "./utilities";
+@import "./components/alert";
+@import "./components/button";
+@import "./components/dropdown";
+@import "./components/input";
+@import "./components/pagination";
+@import "./components/carousel";
+@import "./components/modal";
 
-.register__content {
-  width: 65%;
+.form__login {
+  width: 55%;
   overflow: hidden;
   position: relative;
-  margin-top: 2%;
+  .form__header {
+    @apply py-2 text-center;
+  }
 }
 @media (max-width: 768px) {
-  .register__content {
+  .form__login {
     width: 94%;
   }
 }
 @media (min-width: 768px) and (max-width: 1024px) {
-  .register__content {
+  .form__login {
     width: 85%;
   }
 }
-.register__content .block__image {
+.form__login .block__image {
   width: 45%;
   padding: 1.5em;
   //   background-image: url(/src/banner_.png);
@@ -28,51 +37,39 @@
   align-content: center;
 }
 @media (max-width: 768px) {
-  .register__content .block__image {
+  .form__login .block__image {
     display: none;
   }
 }
-.register__content .block__form {
+.form__login .block__form {
   width: 55%;
   padding: 1.5em;
 }
 @media (max-width: 768px) {
-  .register__content .block__form {
+  .form__login .block__form {
     width: 100%;
     padding: 0.85em;
   }
 }
-.register__content .block__form form {
+.form__login .block__form form {
   width: 100%;
 }
-.register__content .block__form form input[type="radio"] {
+.form__login .block__form form input[type="radio"] {
   padding: 0;
 }
-.register__content .block__form form .signup__socials {
+
+.form__login .block__form form .signup__socials {
   display: flex;
   margin: auto;
   width: 25%;
   text-align: center;
 }
-.register__content .block__form form .signup__socials span {
+
+.form__login .block__form form .signup__socials span {
   background-color: #1da1f2;
   color: #1da1f2;
   fill: #fff;
   margin: 0 5px;
-}
-.form-login {
-  background: var(--white);
-}
-.form-description {
-  padding: 10px 0px;
-  display: flex;
-  justify-content: center;
-}
-.form-header {
-  padding-bottom: 10px !important;
-  border-bottom: 2px solid var(--gray-two) !important;
-  margin-bottom: 10px;
-  text-align: center;
 }
 
 .App {
