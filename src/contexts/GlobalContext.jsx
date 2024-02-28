@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { AuthContext } from "./AuthContext";
 import axios from "axios";
-import { getToken } from "../utilities/utilities";
+import { getToken, parseJwt } from "../utilities/utilities";
 
 const SITE_URL =
   process.env.REACT_APP_MODE === "production"
@@ -18,6 +18,7 @@ export const GlobalContext = React.createContext();
 
 export default function GlobalProvider({ children }) {
   const token = getToken();
+  const user = parseJwt(token);
 
   //*** App data
   const [posts, setPosts] = useState([]);
@@ -207,6 +208,7 @@ export default function GlobalProvider({ children }) {
     SITE_URL,
     setLog,
     log,
+    user: { username: "Gracias Kasongo" },
     params,
     headers: {
       authorization: "Bearer " + token,

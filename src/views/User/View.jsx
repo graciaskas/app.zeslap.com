@@ -111,54 +111,54 @@ export default function View() {
           <div className="mt-3 p-3 bg-white rounded shadow-default user-form">
             <div className="row">
               <div className="col-12">
-                <div className="d-flex user-stats">
+                <div className="flex user-stats">
                   {user?.role === "author" && (
                     <>
-                      <div className="stat-button d-flex align-item-center">
+                      <div className="stat-button flex align-item-center">
                         <i class="fa fa-users stat-icon"></i>
                         <div class="stat-info">
                           <span class="badge bg-secondary d-inline-block">
                             1
                           </span>
-                          <span class="d-block">Followers</span>
+                          <span class="block">Followers</span>
                         </div>
                       </div>
-                      <div className="stat-button d-flex align-item-center">
+                      <div className="stat-button flex align-item-center">
                         <i class="fa fa-heart stat-icon"></i>
                         <div class="stat-info">
                           <span class="badge bg-secondary d-inline-block">
                             1
                           </span>
-                          <span class="d-block">Likes</span>
+                          <span class="block">Likes</span>
                         </div>
                       </div>
-                      <div className="stat-button d-flex align-item-center px-2">
+                      <div className="stat-button flex align-item-center px-2">
                         <i class="fa fa-blog stat-icon"></i>
                         <div class="stat-info">
                           <span class="stat_value badge bg-secondary d-inline-block">
                             1
                           </span>
-                          <span class="d-block">Blog posts</span>
+                          <span class="block">Blog posts</span>
                         </div>
                       </div>
                     </>
                   )}
 
-                  <div className="stat-button d-flex align-item-center px-2">
+                  <div className="stat-button flex align-item-center px-2">
                     <i class="fa fa-cogs stat-icon"></i>
 
                     <div
                       role="button"
                       data-bs-toggle="modal"
                       data-bs-target="#changePwdModal">
-                      <span class="d-block">Change password</span>
+                      <span class="block">Change password</span>
                     </div>
                   </div>
                 </div>
               </div>
 
               <div className="col-lg-2 ">
-                <div className="user-profile bg-white p-2 rounded d-flex">
+                <div className="user-profile bg-white p-2 rounded flex">
                   <div className="image">
                     <img
                       src="/img/_p.jpg"
@@ -173,8 +173,8 @@ export default function View() {
 
               <div className="col-lg-10">
                 <div className="">
-                  <div class="d-flex mb-2">
-                    <div class="d-flex align-items-center">
+                  <div class="flex mb-2">
+                    <div class="flex items-center">
                       <input
                         type="radio"
                         name="type_personnal"
@@ -189,7 +189,7 @@ export default function View() {
                       </label>
                     </div>
 
-                    <div class="d-flex align-items-center mx-4">
+                    <div class="flex items-center mx-4">
                       <input type="radio" name="type_personnal" id="company" />
                       <label
                         htmlFor="company"

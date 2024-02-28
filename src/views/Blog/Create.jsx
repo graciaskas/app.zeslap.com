@@ -200,7 +200,7 @@ export default function Create() {
                   <div className="row">
                     <div className="col-md-2">
                       <div className="border mt-2 rounded input-image">
-                        <div className="input-image-actions d-flex justify-content-between bg-primary text-white p-1 px-2">
+                        <div className="input-image-actions flex justify-between bg-primary text-white p-1 px-2">
                           <span
                             className="fa fa-edit"
                             style={{ cursor: "pointer" }}></span>

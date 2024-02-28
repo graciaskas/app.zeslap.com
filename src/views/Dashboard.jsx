@@ -54,8 +54,7 @@ export default function Dashboard() {
   const [view, setView] = useState(params.get("view"));
 
   const [error, setError] = useState(null);
-  const { getPosts, posts } = useContext(GlobalContext);
-  const { user } = useContext(AuthContext);
+  const { getPosts, posts, user } = useContext(GlobalContext);
 
   useEffect(function () {
     getPosts({ limit: 2 });
@@ -72,9 +71,9 @@ export default function Dashboard() {
 
   return (
     <div className="container-lg">
-      <div className="row">
-        <div className="col-12">
-          <h2>Hello {user?.username}</h2>
+      <div className="grid">
+        <div className="w-full">
+          <h2>Hello {user && user.username}</h2>
           <p>We are happy to see you again...</p>
         </div>
 

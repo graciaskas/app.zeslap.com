@@ -43,6 +43,7 @@ export default function App() {
     title,
     type,
     log,
+    user,
     content,
   } = useContext(GlobalContext);
   const token = getToken();
@@ -51,20 +52,18 @@ export default function App() {
     return <Login />;
   }
 
-  const user = parseJwt(token);
-
   return (
-    <div className="App">
-      <Routes>
-        <Navigation user={user} />
+    <div className="App relative">
+      <Navigation user={user} />
 
-        {loading ? <Loader /> : null}
+      {loading ? <Loader /> : null}
 
-        <main className="main">
-          <Header user={user} />
-          {log ? <Toast title={title} type={type} content={content} /> : null}
+      <main className="main">
+        <Header user={user} />
+        {log ? <Toast title={title} type={type} content={content} /> : null}
 
-          <div className="main-content">
+        <div className="main-content">
+          <Routes>
             <Route path="/" element={<Dashboard />} />
             {user &&
               (user.role === "admin" || (user && user.role === "author")) && (
@@ -92,9 +91,9 @@ export default function App() {
                 <Error code={404} content={"Page can not be found..."} />
               }
             />
-          </div>
-        </main>
-      </Routes>
+          </Routes>
+        </div>
+      </main>
     </div>
   );
 }

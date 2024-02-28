@@ -8,7 +8,7 @@ export default function Login() {
   return (
     <div className="App flex justify-center items-center min-h-screen">
       <div class="form__login flex rounded-lg shadow-default bg-white">
-        <div class="block__image bg-primary d-lg-flex flex-column align-items-center  justify-content-center">
+        <div class="block__image bg-primary d-lg-flex flex-column items-center  justify-center">
           <img src="/src/register_.png" alt="infographic" srcset="" />
         </div>
 

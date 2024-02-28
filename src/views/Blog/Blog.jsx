@@ -89,7 +89,7 @@ function Blog(props) {
 
         <form className="mt-3 p-3 bg-white rounded shadow-default contact-form">
           <div className="border rounded p-4">
-            <div className="d-flex border-bottom position-relative pb-2">
+            <div className="flex border-bottom position-relative pb-2">
               <div className="icon_round bg-secondary text-white">
                 <i className="fa fa-user" />
               </div>
@@ -97,7 +97,7 @@ function Blog(props) {
                 <h4>
                   <strong>{post.author_id[1]}</strong>
                 </h4>
-                {/* <small className="d-block" style={{ fontSize: ".75rem" }}>
+                {/* <small className="block" style={{ fontSize: ".75rem" }}>
                   Software developer.
                 </small> */}
               </div>
@@ -113,7 +113,7 @@ function Blog(props) {
             </div>
 
             <div className="py-3">
-              <h4 className="mb-2 d-block"> {post.title} </h4>
+              <h4 className="mb-2 block"> {post.title} </h4>
               {/* Blog header */}
               <div>
                 <span>
@@ -148,8 +148,8 @@ function Blog(props) {
               />
             </div>
 
-            <div className="d-flex align-items-center pt-2 pb-3">
-              <div className="d-flex align-items-center">
+            <div className="flex items-center pt-2 pb-3">
+              <div className="flex items-center">
                 <span className="fa fa-heart"></span>
                 <small
                   className="text-montserrat"
@@ -167,7 +167,7 @@ function Blog(props) {
               </div>
             </div>
 
-            <div className="d-flex align-items-center justify-content-between border-top pt-3">
+            <div className="flex items-center justify-between border-top pt-3">
               <Link
                 to={`/blog/edit?blog=${post._id}`}
                 role={"button"}
@@ -191,7 +191,7 @@ function Blog(props) {
           <div className="comments">
             {postComments.map((postComment) => (
               <div
-                class="comment d-flex align-items-start mt-3"
+                class="comment flex align-items-start mt-3"
                 id={`${postComment._id}`}>
                 <div class="commenter bg-secondary icon_round">
                   <span class="text-white">GK</span>
@@ -204,7 +204,7 @@ function Blog(props) {
                     dangerouslySetInnerHTML={{
                       __html: postComment.comment,
                     }}></div>
-                  <div className="d-flex justify-content-end">
+                  <div className="flex justify-content-end">
                     <small class="mt-2">
                       Commented on:
                       {new Date(postComment.createdAt).toLocaleString()}

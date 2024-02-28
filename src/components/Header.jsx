@@ -35,9 +35,9 @@ export default function Header({ user }) {
 
   return (
     <>
-      <header className="main-header bg-white shadow-default p-2 d-none d-md-flex  align-items-center">
+      <header className="main-header bg-white shadow-default p-2 d-none d-mflex  items-center">
         <div className="container-lg">
-          <div className="d-flex justify-content-between align-items-center">
+          <div className="flex justify-between items-center">
             <form action="" className="w-50 rounded-pill bg-gray">
               <input
                 type="text"
@@ -45,7 +45,7 @@ export default function Header({ user }) {
                 className="w-100 bg-gray rounded-pill"
               />
             </form>
-            <nav className="header__icons d-flex align-items-center justify-content-center">
+            <nav className="header__icons flex items-center justify-center">
               <li className="header__icon  position-relative  px-2 bg-gray rounded-pill">
                 <i className="fa fa-comments"></i>
                 <span className="position-absolute bottom-0 start-100 translate-middle badge rounded-pill bg-warning">
@@ -98,12 +98,12 @@ export default function Header({ user }) {
         </div>
       </header>
 
-      <header className="d-flex justify-content-between d-md-none align-items-center bg-white shadow-default p-2 d-flex  align-items-center">
+      <header className="flex justify-between d-md-none items-center bg-white shadow-default p-2 flex  items-center">
         <div className="header__brand">
           <img src="https://zeslap.com/src/icon.png" alt="" width={100} />
         </div>
 
-        <ul className="header__icons d-flex align-items-center">
+        <ul className="header__icons flex items-center">
           <li className="header__icon  position-relative  px-2 bg-gray rounded-pill">
             <i className="fa fa-comments"></i>
             <span className="position-absolute bottom-0 start-100 translate-middle badge rounded-pill bg-warning">
@@ -141,14 +141,12 @@ export default function Header({ user }) {
         <div className="navigation__container" style={state}>
           <nav className="navigation bg-secondary" style={{ width: "80%" }}>
             <div className="navigation-nav" role={"navigation"}>
-              <Link to="/" className="d-flex align-items-center">
+              <Link to="/" className="flex items-center">
                 <i className="fas fa-columns"></i>
                 <span className="text-decoration-none t-white">Dashboard</span>
               </Link>
               {user && user.role === "admin" && (
-                <Link
-                  to="/contacts/?view=th"
-                  className="d-flex align-items-center">
+                <Link to="/contacts/?view=th" className="flex items-center">
                   <i className="fas fa-envelope"></i>
                   <span className="text-decoration-none t-white">
                     Site contacts
@@ -161,16 +159,14 @@ export default function Header({ user }) {
               {user && user.role === "admin" && (
                 <Link
                   to="/newsletters/?view=list"
-                  className="d-flex align-items-center">
+                  className="flex items-center">
                   <i className="fas fa-at "></i>
                   <span className="text-decoration-none">Newsletters</span>
                   <i className="badge rounded-pill bg-orange float-right">05</i>
                 </Link>
               )}
               {user && user.role === "admin" && (
-                <Link
-                  to="/users/?view=th"
-                  className="d-flex align-items-center">
+                <Link to="/users/?view=th" className="flex items-center">
                   <i className="fas fa-users "></i>
                   <span className="text-decoration-none t-white">Users</span>
                   <i className="badge rounded-pill bg-primary float-right">
@@ -185,14 +181,14 @@ export default function Header({ user }) {
                     <Link
                       data-bs-toggle="collapse"
                       to={"#multiCollapseExample1"}
-                      className="collapse-item d-block w-100">
+                      className="collapse-item block w-100">
                       <i className="fas fa-blog "></i>
                       <span className="text-decoration-none t-white">Post</span>
                     </Link>
                     <div
                       className="collapse multi-collapse bg-secondary-dark-2 rounded"
                       id="multiCollapseExample1">
-                      {/* <Link to="/blog/?view=th" className="d-flex align-items-center">
+                      {/* <Link to="/blog/?view=th" className="flex items-center">
 									<i className="fas fa-columns"></i>
 									<span className="text-decoration-none t-white">
 										Dashboard
@@ -200,7 +196,7 @@ export default function Header({ user }) {
 								</Link> */}
                       <Link
                         to="/blog/blogs/?view=th"
-                        className="d-flex align-items-center active">
+                        className="flex items-center active">
                         <i className="fas fa-blog "></i>
                         <span className="text-decoration-none t-white">
                           Posts
@@ -211,7 +207,7 @@ export default function Header({ user }) {
                       </Link>
                       <Link
                         to="/comments/?view=th"
-                        className="d-flex align-items-center">
+                        className="flex items-center">
                         <i className="fas fa-blog "></i>
                         <span className="text-decoration-none t-white">
                           Comments
@@ -222,7 +218,7 @@ export default function Header({ user }) {
                       </Link>
                       <Link
                         to="/categories/?view=th"
-                        className="d-flex align-items-center">
+                        className="flex items-center">
                         <i className="fas fa-blog "></i>
                         <span className="text-decoration-none t-white">
                           Categories
@@ -238,19 +234,19 @@ export default function Header({ user }) {
               {user && user.role === "admin" && (
                 <Link
                   to="/subscriptions/?view=list"
-                  className="d-flex align-items-center">
+                  className="flex items-center">
                   <i className="fas fa-at "></i>
                   <span className="text-decoration-none">Subscriptions</span>
                   <i className="badge rounded-pill bg-orange float-right">05</i>
                 </Link>
               )}
 
-              <Link to="/plans" className="d-flex align-items-center">
+              <Link to="/plans" className="flex items-center">
                 <i className="fas fa-cog "></i>
                 <span className="text-decoration-none t-white">Plans</span>
               </Link>
 
-              <Link to="/payments" className="d-flex align-items-center">
+              <Link to="/payments" className="flex items-center">
                 <i className="fa fa-credit-card "></i>
                 <span className="text-decoration-none t-white">
                   Payments history

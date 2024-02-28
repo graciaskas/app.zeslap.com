@@ -19,8 +19,8 @@ export default function BlogCard(props) {
   return (
     <Link
       to={"/blog/view?blog=" + post._id}
-      className="shadow-default rounded p-2  bg-white mb-3 d-block text-secondary">
-      <div className="d-flex border-bottom pb-2 position-relative">
+      className="shadow-default rounded p-2  bg-white mb-3 block text-secondary">
+      <div className="flex border-bottom pb-2 position-relative">
         <img
           src="/img/_q.jpg"
           alt=""
@@ -30,7 +30,7 @@ export default function BlogCard(props) {
         <div style={{ marginLeft: "10px", marginTop: "-4px" }}>
           <strong>{post.author_id[1]}</strong>
           <small
-            className="d-block text-montserrat"
+            className="block text-montserrat"
             style={{ fontSize: ".8rem", marginTop: "-2px" }}>
             <i className="fa fa-calendar-alt" />{" "}
             {new Date(post.createdAt).toLocaleString()}
@@ -60,8 +60,8 @@ export default function BlogCard(props) {
             />
             {post.category_id[1]}
           </div>
-          <div className="d-flex align-items-center  border-top pt-2">
-            <div className="d-flex align-items-center">
+          <div className="flex items-center  border-top pt-2">
+            <div className="flex items-center">
               <span className="fa fa-heart text-white bg-primary rounded-pill px-1"></span>
               <small className="text-montserrat" style={{ marginLeft: "5px" }}>
                 {post.likes} Like(s)

@@ -6,13 +6,13 @@ export default function Contact({ contact }) {
 
   return (
     <div className="rounded p-4 bg-white border mb-3">
-      <div className="d-flex border-bottom position-relative pb-2">
+      <div className="flex border-bottom position-relative pb-2">
         <div className="icon_round bg-secondary text-white">
           <i className="fa fa-user" />
         </div>
         <div style={{ marginLeft: "5px", marginTop: "-5px" }}>
           <strong>{name}</strong>
-          <small className="d-block" style={{ fontSize: ".75rem" }}>
+          <small className="block" style={{ fontSize: ".75rem" }}>
             {new Date(contact.createdAt).toLocaleString()}
           </small>
         </div>
@@ -28,7 +28,7 @@ export default function Contact({ contact }) {
       </div>
 
       <div className="py-3">
-        <strong className="mb-2 d-block" style={{ fontSize: ".85rem" }}>
+        <strong className="mb-2 block" style={{ fontSize: ".85rem" }}>
           Object : {subject.substring(0, 110) + "..."}
         </strong>
         <p style={{ wordBreak: "break-word" }}>
@@ -40,7 +40,7 @@ export default function Contact({ contact }) {
         </div>
       </div>
 
-      <div className="d-flex align-items-center justify-content-between border-top pt-3">
+      <div className="flex items-center justify-between border-top pt-3">
         <Link
           role={"button"}
           to={"./view?q=" + contact._id}
