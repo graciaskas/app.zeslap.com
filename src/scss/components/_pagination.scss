@@ -1,0 +1,27 @@
+.pagination {
+    .page-item {
+        margin-right: .5rem;
+        &.active .page-link{
+            color: map-get($colors, 'white') !important;
+            border: 1px solid map-get($colors, 'secondary');
+            background-color: map-get($colors, 'secondary');
+        }
+        .page-link {
+            color: map-get($colors, 'primary');
+            box-shadow: none;
+            outline: none;
+            color: map-get($colors, 'secondary');
+            border: 1px solid #efefef;
+            box-shadow: none !important;
+            overflow: hidden !important;
+            outline: none !important;
+
+            &:hover {
+                color: map-get($colors, 'white');
+                background-color: map-get($colors, 'primary');
+                border: 1px solid map-get($colors, 'primary');
+            }
+        }
+    }  
+}
+

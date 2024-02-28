@@ -20,10 +20,10 @@ import {
   useNavigate,
 } from "react-router-dom";
 
-import "./css/bootstrap.min.css";
-import "./css/all.min.css";
-import "./css/main.min.css";
-// import "./scss/style.scss";
+// import "./css/bootstrap.min.css";
+// import "./css/all.min.css";
+// import "./css/main.min.css";
+import "./css/style.min.css";
 
 import Header from "./components/Header";
 import Loader from "./components/Loader";
@@ -36,24 +36,30 @@ import Payment from "./components/Payment";
 import Plan from "./components/Plan";
 import { AuthContext } from "./contexts/AuthContext";
 import Toast from "./components/Toast";
+import Login from "./views/Login";
 
 export default function App() {
-  const { user } = useContext(AuthContext);
-  const { loading, toast, log } = useContext(GlobalContext);
-  const { title, type, content } = toast;
+  // const { user } = useContext(AuthContext);
+  // const { loading = false, toast, log } = useContext(GlobalContext);
+  const { loading = false, toast, log } = {};
+  // const { title, type, content } = toast;
+  const user = { name: "Gracias Kasongo", id: "xgh67hHDY4" };
+  const { title, type, content } = {};
+
+  return <Login />;
 
   return (
     <div className="App">
-      <Navigation user={user} />
+      <Routes>
+        <Navigation user={user} />
 
-      {loading ? <Loader /> : null}
+        {loading ? <Loader /> : null}
 
-      <main className="main">
-        <Header user={user} />
-        {log ? <Toast title={title} type={type} content={content} /> : null}
+        <main className="main">
+          <Header user={user} />
+          {log ? <Toast title={title} type={type} content={content} /> : null}
 
-        <div className="main-content">
-          <Routes>
+          <div className="main-content">
             <Route path="/" element={<Dashboard />} />
             {user &&
               (user.role === "admin" || (user && user.role === "author")) && (
@@ -81,9 +87,9 @@ export default function App() {
                 <Error code={404} content={"Page can not be found..."} />
               }
             />
-          </Routes>
-        </div>
-      </main>
+          </div>
+        </main>
+      </Routes>
     </div>
   );
 }

@@ -1,0 +1,34 @@
+.form-control {
+    padding: .375rem 1.2rem !important;
+    border-radius: 0.15rem !important;
+}
+
+.form-control-sm {
+    padding: .375rem 1.2rem !important;    
+    border-radius: 0.15rem !important;
+    display: block;
+    width: 100%;
+    appearance: none;
+}
+
+.input-group { 
+    display: flex;
+    flex-wrap: nowrap;
+    border-radius: 0.15rem !important;
+
+    .input-group-text {
+        // width: 55px;
+        border: none;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        align-content: center;
+        border-radius: 0.15rem !important;
+    }
+    input {
+        width: 90% !important;;
+        border: 1px solid transparent!important;
+        padding: 0.75em 0.938em !important;
+    }
+}
+

@@ -1,0 +1,150 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;800;900&family=Raleway:wght@900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+$colors: (
+  "primary": #1da1f2,
+  "success": rgb(30, 230, 180),
+  "secondary": rgb(35, 35, 50),
+  "danger": #dc3545,
+  "odoo": #714b67,
+  "white": #fff,
+  "gray": #f8fbfc,
+  "transparent": transparent,
+);
+
+:root {
+  @each $color, $value in $colors {
+    --#{$color}: #{$value};
+  }
+}
+
+/*** 1. RESET ***/
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5em;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  min-width: 320px !important;
+  font-family: "Inter", "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif, sans-serif;
+  color: map-get($colors, "secondary");
+  font-size: 0.95em;
+  overflow-x: hidden;
+  background-color: map-get($colors, "gray");
+}
+
+h1 {
+  font-size: 2.35em;
+}
+
+h2 {
+  font-size: 2em;
+}
+
+h3 {
+  font-size: 1.688em;
+}
+
+h4 {
+  font-size: 1.375em;
+}
+
+h5 {
+  font-size: 1.1em;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.563em !important;
+  }
+
+  h2 {
+    font-size: 1.375em !important;
+  }
+
+  h3,
+  h4 {
+    font-size: 1.22em !important;
+  }
+}
+
+ul {
+  // padding: 0 !important;;
+  list-style: none;
+  list-style-type: none;
+}
+
+li {
+  list-style: none;
+  padding-left: 0 !important;
+}
+
+a {
+  text-decoration: none;
+  color: var(--primary);
+  &:hover {
+    color: var(--primary);
+  }
+  &.btn {
+    font-family: "Raleway", system-ui, -apple-system, BlinkMacSystemFont,
+      "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+      "Helvetica Neue", sans-serif;
+  }
+}
+
+a:not(.btn) {
+  font-weight: normal !important;
+}
+
+a:visited {
+  background-color: transparent;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  pointer-events: none;
+}
+
+input:not([type="radio"], [type="checkbox"]),
+button,
+select:not(.form-control-sm),
+textarea {
+  padding: 0.75em 0.938em !important;
+  border: 1px solid transparent !important;
+  border-radius: 0.15em !important;
+  outline: none;
+}
+
+select {
+  outline: none;
+  border: none;
+  option {
+    padding: 5px !important;
+  }
+}
+
+textarea:focus,
+input:focus {
+  outline: 2px solid var(--blue);
+}
+
+textarea {
+  resize: none;
+  font-family: inherit !important;
+}

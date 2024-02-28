@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { AuthContext } from "./AuthContext";
+import axios from "axios";
 
 const SITE_URL =
   process.env.REACT_APP_MODE === "production"
@@ -76,26 +77,28 @@ export default function GlobalProvider({ children }) {
   async function getPost(setPost, id) {
     setLoading(true);
     try {
-      const response = await fetch(BASE_URI + "/posts/" + id, {
+      let uri = `${BASE_URI}/posts/${id}`;
+      const { data } = await axios(BASE_URI + "/posts/" + id, {
         headers: {
-          authorization: "Bearer " + token,
+          Authorization: "Bearer " + token,
+          Accept: "application/json",
         },
       });
-      const { data } = await response.json();
-      setLoading(false);
+      // const { data } = await response.json();
+      // setLoading(false);
 
-      if (!response.error) return setPost(data);
-      setLog(true);
-      setToast({
-        ...toast,
-        content:
-          data.message ||
-          "The Post you tried to view is not found on this server !",
-      });
+      // if (!response.error) return setPost(data);
+      // setLog(true);
+      // setToast({
+      //   ...toast,
+      //   content:
+      //     data.message ||
+      //     "The Post you tried to view is not found on this server !",
+      // });
     } catch (e) {
       setLoading(false);
       setToast({ ...toast, content: e.message });
-      throw Error(e);
+      throw Error(e.response);
     }
   }
 

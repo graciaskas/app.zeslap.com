@@ -1,0 +1,21 @@
+.carousel__buttons {
+
+    width: 100%;
+    position: absolute;
+    top: 45%;
+    margin: auto;
+    padding: 0 1.8rem;
+    z-index: 1;
+
+    .icon_round {
+        cursor: pointer;
+
+        &:first-child {
+            margin-right: -5px !important;
+        }
+    }
+
+    @media (max-width:768px) {
+        padding: 0rem;
+    }
+}
