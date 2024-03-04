@@ -8,6 +8,7 @@ import { GlobalContext } from "../../contexts/GlobalContext";
 import Toast from "../../components/Toast";
 import Editor from "../../components/Editor";
 import { AuthContext } from "../../contexts/AuthContext";
+import axiosClient from "../../axios/axiosClient";
 
 const imgDefault = "/img/user_icon.png";
 
@@ -22,7 +23,6 @@ export default function Create() {
     params,
     setLog,
   } = useContext(GlobalContext);
-  const { token } = useContext(AuthContext);
   const navigate = useNavigate();
   const [action, setAction] = useState("create");
   const [post, setPost] = useState(null);
@@ -42,6 +42,7 @@ export default function Create() {
     content: null,
     cover: null,
     description: "",
+    keywords: [],
     tags: [],
   });
 
@@ -78,45 +79,20 @@ export default function Create() {
 
     try {
       setLoading(true);
-      const uri =
-        action === "create"
-          ? `${BASE_URI}/posts`
-          : `${BASE_URI}/posts/${post?.id}`;
+      const uri = action === "create" ? `/posts` : `/posts/${post?.id}`;
 
       const formData = new FormData();
       for (let key in state) {
         formData.append(key, state[key]);
       }
 
-      const response = await fetch(uri, {
-        method: action === "create" ? "POST" : "PUT",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        body: formData,
-      });
+      const { data } =
+        action === "create"
+          ? await axiosClient.post(uri, formData)
+          : await axiosClient.put(uri, formData);
       setLoading(false);
-      const { error, message } = await response.json();
 
-      if (!error) {
-        //Handle user UI Error view
-        setLog(true);
-        setToast({
-          ...toast,
-          content: "Post creation completed with success !",
-          type: "success",
-          title: "Post action done",
-        });
-        return navigate("/blog/blogs");
-      } else {
-        setLog(true);
-        setToast({
-          ...toast,
-          content: message,
-          type: "danger",
-          title: "Action fail",
-        });
-      }
+      return navigate("/blog/blogs");
     } catch (e) {
       setLoading(false);
       setToast({ ...toast, content: e.message });
@@ -197,8 +173,8 @@ export default function Create() {
 
               <div className="col-12">
                 <div className="p-3 bg-white mt-3 shadow-default rounded">
-                  <div className="row">
-                    <div className="col-md-2">
+                  <div className="flex">
+                    <div className="w-[15%] mr-4">
                       <div className="border mt-2 rounded input-image">
                         <div className="input-image-actions flex justify-between bg-primary text-white p-1 px-2">
                           <span
@@ -225,32 +201,28 @@ export default function Create() {
                       </div>
                     </div>
 
-                    <div className="col-md-10">
-                      <div className="row">
-                        <div className="col-md-6 col-12">
-                          <div className="input-group border  w-100 mt-2 ">
-                            <span
-                              className="input-group-text"
-                              id="basic-addon1">
-                              <i className="fa fa-book" />
-                            </span>
-                            <input
-                              type="text"
-                              placeholder="Post title"
-                              required
-                              name="title"
-                              defaultValue={post?.title}
-                              onChange={(e) =>
-                                setState({ ...state, title: e.target.value })
-                              }
-                            />
-                          </div>
+                    <div className="w-[85%]">
+                      <div className="grid grid-cols-2 gap-5">
+                        <div className="input__group border  w-100 mt-2 ">
+                          <span className="input__group-text" id="basic-addon1">
+                            <i className="fa fa-book" />
+                          </span>
+                          <input
+                            type="text"
+                            placeholder="Post title"
+                            required
+                            name="title"
+                            defaultValue={post?.title}
+                            onChange={(e) =>
+                              setState({ ...state, title: e.target.value })
+                            }
+                          />
                         </div>
 
-                        <div className="col-md-6 col-12 relative">
-                          <div className="input-group border  w-100 mt-2">
+                        <div className="relative">
+                          <div className="input__group border  w-100 mt-2">
                             <span
-                              className="input-group-text"
+                              className="input__group-text"
                               id="basic-addon1">
                               <i className="fa fa-th" />
                             </span>
@@ -283,12 +255,34 @@ export default function Create() {
                             </div>
                           )}
                         </div>
+                      </div>
 
-                        {/* Post description field */}
-                        <div className="col-md-12">
-                          <div className="input-group border  w-100 mt-2">
+                      <div>
+                        {/* Post keywords field */}
+                        <div className="w-4/4">
+                          <div className="input__group border  w-100 mt-2">
                             <span
-                              className="input-group-text"
+                              className="input__group-text"
+                              id="basic-addon1">
+                              <i className="fa fa-key" />
+                            </span>
+                            <input
+                              type="text"
+                              placeholder="Post keywords (separte with a coma)"
+                              onChange={(e) => {
+                                let keywords = e.target.value;
+                                keywords.split(",");
+                                setState({ ...state, keywords });
+                              }}
+                              name="tags"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="w-4/4">
+                          <div className="input__group border  w-100 mt-2">
+                            <span
+                              className="input__group-text"
                               id="basic-addon1">
                               <i className="fa fa-list" />
                             </span>
@@ -307,15 +301,17 @@ export default function Create() {
 
                         {/* Post description field */}
                         <div className="col-md-12">
-                          <div className="input-group border  w-100 mt-2">
+                          <div className="input__group border  w-100 mt-2">
                             <span
-                              className="input-group-text"
+                              className="input__group-text"
                               id="basic-addon1">
                               <i className="fa fa-book" />
                             </span>
                             <textarea
                               type="text"
                               placeholder="Post description"
+                              className="w-full"
+                              rows={4}
                               onChange={(e) =>
                                 setState({
                                   ...state,

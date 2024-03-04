@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
-import { AuthContext } from "./AuthContext";
-import axios from "axios";
+import { useSearchParams } from "react-router-dom";
+
+import axiosClient from "../axios/axiosClient";
 import { getToken, parseJwt } from "../utilities/utilities";
 
 const SITE_URL =
@@ -22,6 +22,7 @@ export default function GlobalProvider({ children }) {
 
   //*** App data
   const [posts, setPosts] = useState([]);
+  const [users, setUsers] = useState([]);
 
   const [loading, setIsLoading] = useState(false);
   const [log, setLog] = useState(false);
@@ -41,6 +42,22 @@ export default function GlobalProvider({ children }) {
 
   function getPreviousItems() {}
 
+  async function getUsers() {
+    setLoading(true);
+    try {
+      const { data } = await axiosClient.get("/users?sort=all");
+      setUsers(data.data);
+      setLoading(false);
+    } catch (e) {
+      const { data } = e.response;
+      setLog(true);
+      setLoading(false);
+      setToast({
+        content: data.message,
+      });
+    }
+  }
+
   /**
    * Get posts and bind to posts state varibale
    * @param {*} limit data limit
@@ -49,25 +66,13 @@ export default function GlobalProvider({ children }) {
   async function getPosts({ limit = 10 }) {
     setLoading(true);
     try {
-      const res = await fetch(`${BASE_URI}/posts?limit=${limit}`, {
-        method: "GET",
-        headers: {
-          authorization: "Bearer " + token,
-        },
-      });
-      const json = await res.json();
+      const { data } = await axiosClient(`/posts?limit=${limit}`);
       setLoading(false);
-      if (!json.error) {
-        return setPosts(json.data);
-      }
-      setToast({
-        ...toast,
-        content: json.message,
-      });
+      return setPosts(data.data);
     } catch (error) {
-      setLog(true);
       setLoading(false);
-      throw Error(error);
+      setLog(true);
+      console.log(error);
     }
   }
   /**
@@ -79,28 +84,12 @@ export default function GlobalProvider({ children }) {
   async function getPost(setPost, id) {
     setLoading(true);
     try {
-      let uri = `${BASE_URI}/posts/${id}`;
-      const { data } = await axios(BASE_URI + "/posts/" + id, {
-        headers: {
-          Authorization: "Bearer " + token,
-          Accept: "application/json",
-        },
-      });
-      // const { data } = await response.json();
-      // setLoading(false);
-
-      // if (!response.error) return setPost(data);
-      // setLog(true);
-      // setToast({
-      //   ...toast,
-      //   content:
-      //     data.message ||
-      //     "The Post you tried to view is not found on this server !",
-      // });
+      const { data } = await axiosClient("/posts/" + id);
+      setPost(data.data);
     } catch (e) {
+      const { data } = e.response;
       setLoading(false);
-      setToast({ ...toast, content: e.message });
-      throw Error(e.response);
+      setToast({ ...toast, content: data.message });
     }
   }
 
@@ -208,7 +197,9 @@ export default function GlobalProvider({ children }) {
     SITE_URL,
     setLog,
     log,
-    user: { username: "Gracias Kasongo" },
+    users,
+    getUsers,
+    user,
     params,
     headers: {
       authorization: "Bearer " + token,

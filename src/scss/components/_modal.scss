@@ -1,9 +1,18 @@
 .modal {
-    background-color: rgba(250,250,250,.9);
-    .modal-content{
-        border: none;
+  background-color: rgba(250, 250, 250, 0.9);
+  z-index: 1000;
+  @apply fixed overflow-auto;
+  @apply items-center justify-center w-full h-full top-0 left-0;
+  .modal-dialog {
+    @apply bg-white shadow-default rounded-md p-3 min-w-[30%] relative;
+    .modal-content {
+      border: none;
+      .modal-header {
+        @apply border-b py-2;
+        span[role="button"] {
+          @apply absolute right-5 top-5 badge bg-secondary text-white flex items-center justify-center;
+        }
+      }
     }
-}
-.modal-header {
-    padding: .7rem 1rem;
+  }
 }

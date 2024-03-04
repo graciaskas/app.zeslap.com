@@ -25,13 +25,16 @@ function AppBar({
     <div className="col-12 mb-3">
       <div className="flex flex-wrap items-center justify-between bg-white rounded shadow-default p-3 ">
         <h5
-          className="text-secondary h5 text-raleway"
+          className="text-secondary h4 text-raleway"
           style={{ marginBottom: "2px" }}>
-          <Link to={"/"}>
+          <Link to={"/"} className="text-primary">
             <i className="fa fa-home" />
           </Link>{" "}
-          /<Link to={linkToApp}>{appName}</Link> /
-          {create && <Link to={linkToCreate}>Create</Link>}
+          /
+          <Link to={linkToApp} className="text-primary">
+            {appName}
+          </Link>{" "}
+          /{create && <Link to={linkToCreate}>Create</Link>}
           {title}
         </h5>
 
@@ -51,22 +54,22 @@ function AppBar({
                   className="dropdown-menu p-4 shadow-default border-0 rounded w-auto"
                   aria-labelledby="dropdownFilters">
                   <li>
-                    <Link href="#" className="dropdown-itemx">
+                    <Link href="#" className="dropdown-item">
                       All
                     </Link>
                   </li>
                   <li>
-                    <Link href="#" className="dropdown-itemx">
+                    <Link href="#" className="dropdown-item">
                       Archived
                     </Link>
                   </li>
                   <li>
-                    <Link href="#" className="dropdown-itemx">
+                    <Link href="#" className="dropdown-item">
                       Not activated
                     </Link>
                   </li>
                   <li>
-                    <Link className="dropdown-itemx">
+                    <Link className="dropdown-item">
                       <i className="fa fa-plus-circle" /> Custom filter
                     </Link>
                   </li>
@@ -85,7 +88,7 @@ function AppBar({
           //Check if must show pagination
           showPagination && (
             <div className="pagination" role={"list"}>
-              <li className="page-item">
+              <li className="page-item hover:bg-transparent">
                 <Link href="#" className="page-link input">
                   <input type="number" defaultValue={data.length} />
                 </Link>

@@ -1,6 +1,19 @@
 .btn {
-  @apply py-2 px-3 rounded-[.2rem];
+  @apply py-2 px-3 rounded-[.2rem] text-white;
   @apply text-center;
+  font-size: 0.9rem;
+  &:focus {
+    overflow: hidden;
+    outline: none;
+    border: none;
+    box-shadow: none;
+  }
+}
+
+.btn-sm {
+  @apply py-1 px-2 rounded-[.2rem];
+  @apply text-center;
+  font-size: 0.9rem;
   &:focus {
     overflow: hidden;
     outline: none;

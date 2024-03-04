@@ -10,6 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import "../../css/ckeditor.css";
 import { AuthContext } from "../../contexts/AuthContext";
+import axiosClient from "../../axios/axiosClient";
 
 function Blog(props) {
   const [post, setPost] = useState(null);
@@ -23,7 +24,6 @@ function Blog(props) {
     setLog,
     setToast,
   } = useContext(GlobalContext);
-  const { token } = useContext(AuthContext);
 
   const postContentRef = useRef(null);
   const navigate = useNavigate();
@@ -38,19 +38,10 @@ function Blog(props) {
       return;
     }
     try {
-      const response = await fetch(BASE_URI + "/posts/" + post, {
-        method: "delete",
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
-      const { error, message } = await response();
-      if (!error) {
-        return navigate("/blog/blogs");
-      }
-      alert(error, message);
+      const { data } = await axiosClient.delete("/posts/" + post);
+      return navigate("/blog/blogs");
     } catch (error) {
-      console.error(error);
+      console.error(error.response.data);
     }
   };
 
@@ -113,7 +104,7 @@ function Blog(props) {
             </div>
 
             <div className="py-3">
-              <h4 className="mb-2 block"> {post.title} </h4>
+              <h4 className="mb-2 block h4"> {post.title} </h4>
               {/* Blog header */}
               <div>
                 <span>
@@ -191,12 +182,12 @@ function Blog(props) {
           <div className="comments">
             {postComments.map((postComment) => (
               <div
-                class="comment flex align-items-start mt-3"
+                className="comment flex align-items-start mt-3"
                 id={`${postComment._id}`}>
-                <div class="commenter bg-secondary icon_round">
-                  <span class="text-white">GK</span>
+                <div className="commenter bg-secondary icon_round">
+                  <span className="text-white">GK</span>
                 </div>
-                <div class="w-100 " style={{ marginLeft: "7px" }}>
+                <div className="w-100 " style={{ marginLeft: "7px" }}>
                   <h5>{postComment.commentor}</h5>
                   <div
                     className="bg-primary-light-9 p-3"
@@ -205,7 +196,7 @@ function Blog(props) {
                       __html: postComment.comment,
                     }}></div>
                   <div className="flex justify-content-end">
-                    <small class="mt-2">
+                    <small className="mt-2">
                       Commented on:
                       {new Date(postComment.createdAt).toLocaleString()}
                     </small>

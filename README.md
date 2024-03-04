@@ -1,6 +1,18 @@
-# ZeSlap User Management Software
+# ZeSlap Platforms Management Software
 
-This is the official web application to manage all zeslap users and services.
+This is the official application to manage all services.
+
+## Technologies used
+
+- React.js
+- Tailwind.css
+- Axios
+
+## Plugins
+
+---
+
+- CKEditor
 
 ## Start the application
 
@@ -9,7 +21,7 @@ In the project directory, you can run:
 ### `npm start`
 
 Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Open [http://localhost:8085](http://localhost:8085) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.

@@ -37,7 +37,7 @@ function NewsLetters(props) {
   ];
   const rows = [];
   return (
-    <div className="container relative">
+    <div className="container-lg relative">
       <div className="row">
         <AppBar data={[]} appName="Subscriptions" viewTypes={["list"]} />
 

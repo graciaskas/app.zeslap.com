@@ -8,7 +8,7 @@
 @import "./components/modal";
 
 .form__login {
-  width: 55%;
+  width: 33%;
   overflow: hidden;
   position: relative;
   .form__header {
@@ -25,24 +25,10 @@
     width: 85%;
   }
 }
-.form__login .block__image {
-  width: 45%;
-  padding: 1.5em;
-  //   background-image: url(/src/banner_.png);
-  background-size: cover;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-content: center;
-}
-@media (max-width: 768px) {
-  .form__login .block__image {
-    display: none;
-  }
-}
+
 .form__login .block__form {
-  width: 55%;
   padding: 1.5em;
+  width: 100%;
 }
 @media (max-width: 768px) {
   .form__login .block__form {
@@ -55,13 +41,9 @@
 }
 
 .App {
-  height: 100vh;
-  overflow: hidden;
-  display: flex; /*!** End  App aside navigation menu ****/
-  /*! App aside navigation menu */
+  @apply h-screen flex overflow-hidden;
   aside.navigation {
-    height: 100vh;
-    width: 22%;
+    @apply h-screen w-[22%];
   }
 }
 
@@ -180,8 +162,7 @@
   border-bottom: 1px solid #dee2e6;
 }
 .App main .main-content .user-form .user-stats .stat-button {
-  padding: 6px 10px 0 10px !important;
-  text-align: left;
+  @apply p-3;
   white-space: nowrap;
   background-color: rgba(0, 0, 0, 0);
   opacity: 0.8;
@@ -189,14 +170,7 @@
   margin-bottom: 0;
   border-left: 1px solid #dee2e6;
 }
-.App main .main-content .user-form .user-stats .stat-button .stat-icon {
-  margin-left: 6px;
-  display: inline-block;
-  vertical-align: middle;
-  line-height: 44px;
-  padding-right: 10px;
-  width: 30%;
-}
+
 .App main .main-content .user-form .user-stats .stat-button .stat-info {
   vertical-align: middle;
   font-weight: 500;
@@ -206,6 +180,7 @@
 }
 .App main .main-content .user-form .user-stats .stat-button .stat-info span {
   font-size: 0.9rem;
+  margin-right: 5px;
 }
 .App main .main-content .user-form input {
   height: 37px !important;
@@ -227,13 +202,6 @@
 }
 .App main .main-content .user-card.standard {
   border-left: 3px solid #232332;
-}
-.grid {
-  display: flex;
-  align-items: start;
-}
-.grid.grid-cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 .oe_group {
   margin: 10px 0;

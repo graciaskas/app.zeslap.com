@@ -87,8 +87,8 @@ export default function Create() {
                 <div className="p-3 bg-white mt-3 shadow-default rounded">
                   <div className="row">
                     <div className="col-md-6 col-12 relative">
-                      <div className="input-group border  w-100 mt-2">
-                        <span className="input-group-text" id="basic-addon1">
+                      <div className="input__group border  w-100 mt-2">
+                        <span className="input__group-text" id="basic-addon1">
                           <i className="fa fa-th" />
                         </span>
                         <input
@@ -120,8 +120,8 @@ export default function Create() {
                       )}
                     </div>
                     <div className="col-md-6 col-12">
-                      <div className="input-group border  w-100 mt-2 ">
-                        <span className="input-group-text" id="basic-addon1">
+                      <div className="input__group border  w-100 mt-2 ">
+                        <span className="input__group-text" id="basic-addon1">
                           <i className="fa fa-book" />
                         </span>
                         <input

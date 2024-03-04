@@ -43,7 +43,7 @@ body {
     "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
     sans-serif, sans-serif;
   color: map-get($colors, "secondary");
-  font-size: 1rem;
+  font-size: 0.95rem;
   overflow-x: hidden;
   background-color: map-get($colors, "gray");
 }
@@ -111,6 +111,12 @@ input::placeholder {
   font-size: 0.8rem;
 }
 
+label {
+  font-size: 0.8rem;
+  margin-bottom: -10px;
+  padding-top: 5px;
+}
+
 select {
   outline: none;
   border: none;
@@ -127,4 +133,21 @@ input:focus {
 textarea {
   resize: none;
   font-family: inherit !important;
+}
+
+table {
+  @apply w-full border-collapse;
+  thead tr {
+    @apply border-b;
+    th {
+      @apply p-2 text-left;
+    }
+  }
+
+  tbody tr {
+    @apply border-b;
+    td {
+      @apply p-2 text-left;
+    }
+  }
 }

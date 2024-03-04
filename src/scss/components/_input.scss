@@ -1,13 +1,15 @@
 .input {
-  @apply py-2 px-3 rounded-[.2rem];
+  @apply py-2 px-3 rounded-[.2rem] focus:ring-offset-blue-600;
 }
 
 .input__group {
-  @apply flex flex-wrap rounded-[.2rem];
+  @apply flex  rounded-[.2rem];
 
+  .input__icon,
   .input__group-text {
-    @apply text-center flex items-center content-center rounded-[.2rem] border-none;
+    @apply flex items-center justify-center px-2;
   }
+
   input {
     @apply border-none w-[90%];
   }

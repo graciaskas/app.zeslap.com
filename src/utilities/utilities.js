@@ -29,3 +29,19 @@ export const getToken = () => {
     throw Error(error);
   }
 };
+
+export function closeModal(modalId) {
+  if (!typeof modalId || !modalId) {
+    throw Error("Argument modalId missing on close modal !");
+  }
+  let modal = document.querySelector(`#${modalId}`);
+  return modal.classList.replace("flex", "hidden");
+}
+
+export function showModal(modalId) {
+  if (!typeof modalId || !modalId) {
+    throw Error("Argument modalId missing on close modal !");
+  }
+  let modal = document.querySelector(`#${modalId}`);
+  return modal.classList.replace("hidden", "flex");
+}

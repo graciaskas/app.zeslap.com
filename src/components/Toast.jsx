@@ -10,10 +10,14 @@ function Toast({
 }) {
   const toastRef = useRef(null);
   const toastRemoveRef = useRef(null);
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setTimeout(() => {
+      toastRef.current.remove();
+    }, 2000);
+  }, []);
   return (
     <div
-      className="toast absolute right-[1px] top-[1px]  text-white w-[300px] "
+      className="toast absolute right-[1px] top-[1px]  text-white w-[300px] z-[1001] "
       style={{ zIndex: 5 }}
       ref={toastRef}>
       <div

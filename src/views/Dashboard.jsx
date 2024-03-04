@@ -53,26 +53,16 @@ export default function Dashboard() {
   const [params, setParams] = useSearchParams();
   const [view, setView] = useState(params.get("view"));
 
-  const [error, setError] = useState(null);
   const { getPosts, posts, user } = useContext(GlobalContext);
 
   useEffect(function () {
-    getPosts({ limit: 2 });
+    getPosts({ limit: 3 });
   }, []);
-
-  //Check if there is an error
-  if (error) {
-    return (
-      <Error code={500} content="The page is not available for the moment!">
-        <Toast type="danger" title="Something went wrong !" content={error} />
-      </Error>
-    );
-  }
 
   return (
     <div className="container-lg">
-      <div className="w-full">
-        <h2>Hello {user && user.username}</h2>
+      <div className="w-full py-2">
+        <h2 className="h2">Hello {user && user.username}</h2>
         <p>We are happy to see you again...</p>
       </div>
       <div className="grid grid-col lg:grid-cols-3 gap-5">
@@ -204,8 +194,8 @@ export default function Dashboard() {
         {user?.role !== "user" && (
           <div className="col-12 mb-3">
             <div className="p-3 bg-white rounded shadow-default">
-              <h4 className="border-bottom py-2">Lastest posts</h4>
-              <div className="row">
+              <h4 className="border-bottom py-2 h4">Lastest posts</h4>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                 {posts.map((post, id) => (
                   <div className="col-lg-6 col-md-6 col-12" key={id}>
                     <Blog data={post} />

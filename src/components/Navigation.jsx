@@ -6,11 +6,11 @@ export default function Navigation({ user }) {
     <aside className="navigation bg-secondary">
       {/**/}
       <div className="flex items-center bg-white navigation-header">
-        <img src="https://zeslap.com/src/icon.png" alt="" width={150} />
+        <img src="/icons/logo.png" alt="" width={150} />
       </div>
 
       <div className="navigation-nav" role={"navigation"}>
-        <Link to="/" className="flex items-center">
+        <Link to="/dashboard" className="flex items-center">
           <i className="fas fa-columns"></i>
           <span className="text-decoration-none t-white">Dashboard</span>
         </Link>
@@ -39,46 +39,45 @@ export default function Navigation({ user }) {
         {user &&
           (user.role === "admin" || (user && user.role === "author")) && (
             <li className="navigation-dropdown">
-              <Link
-                data-bs-toggle="collapse"
-                to={"#multiCollapseExample1"}
-                className="collapse-item block w-100">
-                <i className="fas fa-blog "></i>
-                <span className="text-decoration-none t-white">Post</span>
-              </Link>
-              <div
-                className="collapse multi-collapse bg-secondary-dark-2 rounded"
-                id="multiCollapseExample1">
-                {/* <Link to="/blog/?view=th" className="flex items-center">
-									<i className="fas fa-columns"></i>
-									<span className="text-decoration-none t-white">
-										Dashboard
-									</span>
-								</Link> */}
-                <Link
-                  to="/blog/blogs/?view=th"
-                  className="flex items-center active">
+              <details className=" block w-100">
+                <summary className="text-white list-none p-2 cursor-pointer hover:bg-slate-300">
                   <i className="fas fa-blog "></i>
-                  <span className="text-decoration-none t-white">Posts</span>
-                  <i className="badge rounded-pill bg-warning float-right">
-                    05
-                  </i>
-                </Link>
-                <Link to="/comments/?view=th" className="flex items-center">
-                  <i className="fas fa-blog "></i>
-                  <span className="text-decoration-none t-white">Comments</span>
-                  <i className="badge rounded-pill bg-success-dark-3 float-right">
-                    125
-                  </i>
-                </Link>
-                <Link to="/categories/?view=th" className="flex items-center">
-                  <i className="fas fa-blog "></i>
-                  <span className="text-decoration-none t-white">
-                    Categories
-                  </span>
-                  <i className="badge rounded-pill bg-odoo float-right">12</i>
-                </Link>
-              </div>
+                  <span className="text-decoration-none t-white">Post</span>
+                </summary>
+                <div className=" bg-secondary-dark-2 rounded">
+                  <Link to="/blog/?view=th" className="flex items-center">
+                    <i className="fas fa-columns"></i>
+                    <span className="text-decoration-none t-white">
+                      Dashboard
+                    </span>
+                  </Link>
+                  <Link
+                    to="/blog/blogs/?view=th"
+                    className="flex items-center active">
+                    <i className="fas fa-blog "></i>
+                    <span className="text-decoration-none t-white">Posts</span>
+                    <i className="badge rounded-pill bg-warning float-right">
+                      05
+                    </i>
+                  </Link>
+                  <Link to="/comments/?view=th" className="flex items-center">
+                    <i className="fas fa-blog "></i>
+                    <span className="text-decoration-none t-white">
+                      Comments
+                    </span>
+                    <i className="badge rounded-pill bg-success-dark-3 float-right">
+                      125
+                    </i>
+                  </Link>
+                  <Link to="/categories/?view=th" className="flex items-center">
+                    <i className="fas fa-blog "></i>
+                    <span className="text-decoration-none t-white">
+                      Categories
+                    </span>
+                    <i className="badge rounded-pill bg-odoo float-right">12</i>
+                  </Link>
+                </div>
+              </details>
             </li>
           )}
 

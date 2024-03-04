@@ -37,11 +37,9 @@ export default function Blogs() {
             {viewType === "list" ? (
               posts.map((post, id) => <BlogList data={post} />)
             ) : (
-              <div className="row">
+              <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1  ">
                 {posts.map((post, id) => (
-                  <div className="col-lg-4 col-md-6 col-12" key={id}>
-                    <Blog data={post} />
-                  </div>
+                  <Blog data={post} key={id} />
                 ))}
               </div>
             )}

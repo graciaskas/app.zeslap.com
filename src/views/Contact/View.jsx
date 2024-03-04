@@ -86,7 +86,7 @@ function View(props) {
   if (!contact) return null;
 
   return (
-    <div className="container">
+    <div className="container-lg">
       <AppBar
         appName="Contacts"
         title={contact.name}

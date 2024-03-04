@@ -3,9 +3,25 @@
 @tailwind utilities;
 
 @layer utilities {
+  /*!* Heading **/
+  .h1 {
+    @apply font-bold text-4xl;
+  }
+  .h2 {
+    @apply font-bold text-3xl;
+  }
+  .h3 {
+    @apply font-bold text-2xl;
+  }
+  .h4 {
+    @apply font-bold text-xl;
+  }
+  .h5 {
+    @apply font-bold text-lg;
+  }
   /** Containers **/
   .container-lg {
-    @apply mx-auto w-[85%];
+    @apply mx-auto w-[92%];
   }
   /*!* Text colors **/
   @each $color, $value in $colors {
@@ -19,8 +35,33 @@
       background-color: #{$value};
     }
   }
+  /*!* Badges **/
+  .badge {
+    @apply rounded-[.25rem] font-bold text-sm p-1 text-center h-[25px] min-w-[25px];
+    font-size: 0.6rem;
+    @each $color, $value in $colors {
+      .badge-#{$color} {
+        color: #{$value};
+      }
+    }
+  }
   /*!* Shadows **/
   .shadow-default {
     box-shadow: 0 2px 3px 0 rgb(0 0 0 / 10%), 0 0 0 1px rgb(0 0 0 / 2%);
+  }
+
+  /*!* Animations **/
+  .rotate {
+    animation: rotate 0.3s infinite;
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(-45deg);
+    }
+
+    100% {
+      transform: rotate(46deg);
+    }
   }
 }

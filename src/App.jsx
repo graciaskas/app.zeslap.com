@@ -39,20 +39,18 @@ import { getToken, parseJwt } from "./utilities/utilities";
 
 export default function App() {
   let {
-    loading = false,
-    title,
-    type,
-    log,
+    toast,
+
+    loading,
+    log = true,
     user,
-    content,
   } = useContext(GlobalContext);
+  const { title, type, content } = toast;
   const token = getToken();
 
   if (!token) {
     return <Login />;
   }
-
-  user = { ...user, role: "admin" };
 
   return (
     <div className="App relative">
@@ -67,6 +65,7 @@ export default function App() {
         <div className="main-content">
           <Routes>
             <Route path="/" element={<Dashboard />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             {user &&
               (user.role === "admin" || (user && user.role === "author")) && (
                 <>

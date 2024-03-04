@@ -7,38 +7,6 @@ import { useEffect } from "react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 
-const ViewComment = ({ comment, id }) => {
-  return (
-    <div class="modal fade" id={id}>
-      <div class="modal-dialog">
-        <div class="modal-content  text-secondary">
-          <div class="modal-header">
-            <h5 class="modal-title">
-              <i class="fa fa-key badge bg-secondary"></i>
-              View comment
-            </h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"></button>
-          </div>
-
-          <form action="/api/employees/?action=report" method="post">
-            <div class="modal-body">{comment}</div>
-
-            <div class="modal-footer">
-              <button class="btn-sm bg-danger text-white" type="submit">
-                <i class="fa fa-trash"></i> Delete comment
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 export default function Index() {
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState(null);
@@ -61,7 +29,7 @@ export default function Index() {
 
         <div className="col-12">
           <div className="p-3 bg-white rounded shadow-default">
-            <ViewComment comment={comment} id="viewComment" />
+            {/* <ViewComment comment={comment} id="viewComment" /> */}
             {viewType === "list" ? (
               <table className="table border">
                 <thead>

@@ -38,62 +38,55 @@ export default function Header({ user }) {
       <header className="app__header bg-white shadow-default p-2 hidden md:flex  items-center">
         <div className="container-lg">
           <div className="flex justify-between items-center">
-            <form action="" className="w-50 rounded-pill bg-gray">
+            <form action="" className="w-70 rounded-pill">
               <input
                 type="search"
                 placeholder="Search"
                 className="w-100 bg-gray rounded-md w-full"
               />
             </form>
-            <nav className="header__icons flex items-center justify-center">
-              <li className="header__icon  relative  px-2 bg-gray rounded-pill">
+            <div className="header__icons flex items-center justify-center gap-6 w-30">
+              <div className="header__icon  relative  px-2 ">
                 <i className="fa fa-comments"></i>
-                <span className="absolute bottom-0 start-100 translate-middle badge rounded-pill bg-warning">
-                  05
+                <span className="absolute top-[-2px] right-[-10px] text-white badge rounded-pill bg-success">
+                  15
                 </span>
-              </li>
-              <li className="header__icon  relative mx-5 px-2 bg-gray rounded-pill">
+              </div>
+              <div className="header__icon  relative mx-5 px-2">
                 <i className="fa fa-bell"></i>
-                <span className="absolute bottom-0 start-100 translate-middle badge rounded-pill bg-orange">
+                <span className="absolute top-[-2px] right-[-10px] text-white badge rounded-pill bg-primary">
                   05
                 </span>
-              </li>
-              <li className="dropdown">
-                <Link
-                  className="btn text-white bg-primary dropdown-toggle"
-                  to={"#"}
-                  role="button"
-                  id="dropdownProducts"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false">
-                  <i className="fa fa-user-circle"></i>
-                  {user?.username}
-                </Link>
-
-                <ul
-                  className="dropdown-menu  p-4 shadow-default border-0 rounded"
-                  aria-labelledby="dropdownProducts">
-                  <li>
-                    <Link
-                      to={`/users/view?q=${user?.id}`}
-                      className="dropdown-itemx">
-                      My profile
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/preferences" className="dropdown-itemx">
-                      My Preferences
-                    </Link>
-                  </li>
-                  <hr />
-                  <li>
-                    <Link to="/logout" className="dropdown-itemx">
-                      <i className="fa fa-times-circle" /> Log Out
-                    </Link>
-                  </li>
-                </ul>
-              </li>
-            </nav>
+              </div>
+              <button className="relative group">
+                <div className="btn bg-primary text-white">
+                  <i className="fa fa-user-circle mr-2 "></i>
+                  <span className="text-white">{user?.username}</span>
+                </div>
+                <div className="absolute bg-white  hidden p-4 shadow-default border-0 rounded min-w-full top-full w-max group-focus:block">
+                  <ul className="text-left">
+                    <li className="px-4 py-1">
+                      <Link
+                        to={`/users/view?q=${user?.id}`}
+                        className="text-sm font-normal hover:bg-gray-100 rounded-sm block">
+                        My profile
+                      </Link>
+                    </li>
+                    <li className="px-4 py-1">
+                      <Link to="/preferences" className="text-sm font-normal">
+                        My Preferences
+                      </Link>
+                    </li>
+                    <hr />
+                    <li className="px-4 py-1 ">
+                      <Link to="/logout" className="text-sm font-normal">
+                        <i className="fa fa-times-circle" /> Log Out
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </button>
+            </div>
           </div>
         </div>
       </header>
@@ -271,22 +264,20 @@ export default function Header({ user }) {
                   <li>
                     <Link
                       to={`/users/view?q=${user?.id}`}
-                      className="dropdown-itemx text-secondary">
+                      className="dropdown-item text-secondary">
                       My profile
                     </Link>
                   </li>
                   <li>
                     <Link
                       to="/preferences"
-                      className="dropdown-itemx text-secondary">
+                      className="dropdown-item text-secondary">
                       My Preferences
                     </Link>
                   </li>
                   <hr />
                   <li>
-                    <Link
-                      to="/logout"
-                      className="dropdown-itemx text-secondary">
+                    <Link to="/logout" className="dropdown-item text-secondary">
                       <i className="fa fa-times-circle" /> Log Out
                     </Link>
                   </li>
