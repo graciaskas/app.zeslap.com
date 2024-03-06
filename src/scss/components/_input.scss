@@ -1,5 +1,5 @@
 .input {
-  @apply py-2 px-3 rounded-[.2rem] focus:ring-offset-blue-600;
+  @apply py-2 px-3 rounded-[.2rem];
 }
 
 .input__group {
@@ -11,6 +11,7 @@
   }
 
   input {
-    @apply border-none w-[90%];
+    @apply border-none w-[95%];
+    outline: none !important;
   }
 }

@@ -15,10 +15,10 @@ export default function Navigation({ user }) {
           <span className="text-decoration-none t-white">Dashboard</span>
         </Link>
         {user && user.role === "admin" && (
-          <Link to="/contacts/?view=th" className="flex items-center">
+          <Link to="/contacts/?view=th" className="">
             <i className="fas fa-envelope"></i>
-            <span className="text-decoration-none t-white">Site contacts</span>
-            <i className="badge rounded-pill bg-secondary float-right">05</i>
+            <span className="text-decoration-none">Site contacts</span>
+            <i className="badge rounded-pill bg-secondary">05</i>
           </Link>
         )}
         {user && user.role === "admin" && (
@@ -40,9 +40,27 @@ export default function Navigation({ user }) {
           (user.role === "admin" || (user && user.role === "author")) && (
             <li className="navigation-dropdown">
               <details className=" block w-100">
-                <summary className="text-white list-none p-2 cursor-pointer hover:bg-slate-300">
-                  <i className="fas fa-blog "></i>
-                  <span className="text-decoration-none t-white">Post</span>
+                <summary
+                  className="text-white list-none cursor-pointer  flex items-center justify-between
+                ">
+                  <div className="p-[0.55rem_0.3rem]">
+                    <i className="fas fa-blog pr-4"></i>
+                    <span className="text-decoration-none t-white">Post</span>
+                  </div>
+                  <svg
+                    class="w-2.5 h-2.5 ms-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 10 6">
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="m1 1 4 4 4-4"
+                    />
+                  </svg>
                 </summary>
                 <div className=" bg-secondary-dark-2 rounded">
                   <Link to="/blog/?view=th" className="flex items-center">

@@ -14,7 +14,7 @@ import Error from "./components/Error";
 import Header from "./components/Header";
 import Loader from "./components/Loader";
 import Toast from "./components/Toast";
-import LogOut from "./components/LogOut";
+import LogOut from "./views/LogOut";
 
 import Login from "./views/Login";
 import Dashboard from "./views/Dashboard";

@@ -42,60 +42,45 @@
 
 .App {
   @apply h-screen flex overflow-hidden;
-  aside.navigation {
+
+  .navigation {
     @apply h-screen w-[22%];
+
+    /*! App Navigaytion header */
+    .navigation-header {
+      @apply w-full p-[15px] h-[10vh];
+      img {
+        border-radius: 0.1rem;
+        margin-right: 5px;
+      }
+    }
+
+    /*! App aside menus &&*/
+    .navigation-nav {
+      @apply w-full p-[.91rem] overflow-y-auto h-[90vh];
+      a {
+        @apply w-full relative list-none mt-[2px]  p-[0.55rem_0.3rem] flex items-center;
+        color: #f7f4f4;
+        transition: 0.25s;
+
+        &:hover:not(.active, .collapse-item) {
+          background-color: rgba(29, 161, 242, 0.3);
+          border-left: 5px solid #1da1f2;
+          border-radius: 0.25rem;
+        }
+
+        span {
+          @apply pl-[0.85rem];
+        }
+
+        i.badge {
+          @apply absolute right-[5px] top-[1rem];
+        }
+      }
+    }
   }
 }
 
-.App aside.navigation .navigation-header,
-.App .navigation .navigation-header {
-  /*! App aside header */
-  width: 100%;
-  padding: 15px;
-  height: 10vh;
-}
-.App aside.navigation .navigation-header img,
-.App .navigation .navigation-header img {
-  border-radius: 0.1rem;
-  margin-right: 5px;
-}
-.App aside.navigation .navigation-nav,
-.App .navigation .navigation-nav {
-  /*! App aside menus &&*/
-  width: 100%;
-  padding: 0.91rem;
-  overflow-y: auto;
-  height: 90vh;
-}
-.App aside.navigation .navigation-nav a,
-.App .navigation .navigation-nav a {
-  width: 100%;
-  margin-top: 2px;
-  color: #f7f4f4;
-  list-style-type: none;
-  transition: 0.25s;
-  font-weight: bold;
-  padding: 0.55rem 0.3rem;
-  position: relative;
-}
-.App aside.navigation .navigation-nav a span,
-.App .navigation .navigation-nav a span {
-  padding-left: 0.85rem;
-}
-.App aside.navigation .navigation-nav a.active,
-.App aside.navigation .navigation-nav a:hover:not(.active, .collapse-item),
-.App .navigation .navigation-nav a.active,
-.App .navigation .navigation-nav a:hover:not(.active, .collapse-item) {
-  background-color: rgba(29, 161, 242, 0.3);
-  border-left: 5px solid #1da1f2;
-  border-radius: 0.25rem;
-}
-.App aside.navigation .navigation-nav a i.badge,
-.App .navigation .navigation-nav a i.badge {
-  position: absolute;
-  right: 5px;
-  top: 1rem;
-}
 .App aside.navigation .navigation-nav .navigation-dropdown,
 .App .navigation .navigation-nav .navigation-dropdown {
   list-style: none;

@@ -58,7 +58,7 @@ export default function Header({ user }) {
                   05
                 </span>
               </div>
-              <button className="relative group">
+              {/* <button className="relative group">
                 <div className="btn bg-primary text-white">
                   <i className="fa fa-user-circle mr-2 "></i>
                   <span className="text-white">{user?.username}</span>
@@ -85,7 +85,59 @@ export default function Header({ user }) {
                     </li>
                   </ul>
                 </div>
-              </button>
+              </button> */}
+              <div className="header__user">
+                <button
+                  id="dropdownHoverButton"
+                  data-dropdown-toggle="dropdownHover"
+                  data-dropdown-trigger="hover"
+                  class="btn bg-primary"
+                  type="button">
+                  <i className="fa fa-user-circle mr-2 "></i>
+                  <span className="text-white">{user?.username}</span>
+                  <svg
+                    class="w-2.5 h-2.5 ms-3"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 10 6">
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="m1 1 4 4 4-4"
+                    />
+                  </svg>
+                </button>
+
+                <div
+                  id="dropdownHover"
+                  class="z-10 hidden bg-white divide-y divide-gray-100 rounded-md shadow-default min-w-44">
+                  <ul
+                    class="py-2 text-sm text-gray-700 dark:text-gray-200 p-2"
+                    aria-labelledby="dropdownHoverButton">
+                    <li className="">
+                      <Link
+                        to={`/users/view?q=${user?.id}`}
+                        class="block p-2 hover:bg-gray-100 rounded">
+                        Profile
+                      </Link>
+                    </li>
+                    <li className="">
+                      <Link to="#" class="block p-2 hover:bg-gray-100 ">
+                        Settings
+                      </Link>
+                    </li>
+
+                    <li>
+                      <Link to={"/logout"} class="block p-2 hover:bg-gray-100 ">
+                        Sign out
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>

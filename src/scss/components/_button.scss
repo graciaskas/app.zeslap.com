@@ -1,12 +1,9 @@
 .btn {
-  @apply py-2 px-3 rounded-[.2rem] text-white;
-  @apply text-center;
-  font-size: 0.9rem;
-  &:focus {
-    overflow: hidden;
-    outline: none;
-    border: none;
-    box-shadow: none;
+  @apply py-2 px-3 rounded-[.2rem]  focus:outline-none  font-medium  text-white text-center inline-flex items-center;
+  @each $color, $value in $colors {
+    &.btn-#{$color} {
+      background-color: #{$value};
+    }
   }
 }
 

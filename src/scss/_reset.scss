@@ -105,6 +105,7 @@ textarea {
   border: 1px solid transparent;
   outline: none;
   @apply py-2 px-3 rounded-[.2rem];
+  outline: none;
 }
 
 input::placeholder {
