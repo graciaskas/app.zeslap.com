@@ -1,8 +1,6 @@
 import axios from "axios";
 import { getToken, parseJwt, setToken } from "../utilities/utilities";
 
-console.log(process.env.REACT_APP_URI);
-
 const axiosClient = axios.create({
   baseURL: process.env.REACT_APP_URI,
   headers: {
