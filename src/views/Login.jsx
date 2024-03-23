@@ -92,7 +92,7 @@ export default function Login() {
               </a>
               <button
                 type="submit"
-                className="btn bg-primary text-white  w-100  mt-2 w-full">
+                className="btn w-full bg-primary text-white  w-100  mt-2 ">
                 Sign in
               </button>
               <a

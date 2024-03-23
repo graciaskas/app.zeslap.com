@@ -104,8 +104,7 @@ select,
 textarea {
   border: 1px solid transparent;
   outline: none;
-  @apply py-2 px-3 rounded-[.2rem];
-  outline: none;
+  @apply py-2 px-3 rounded-[.2rem] outline-none;
 }
 
 input::placeholder {
@@ -124,11 +123,6 @@ select {
   option {
     padding: 5px !important;
   }
-}
-
-textarea:focus,
-input:focus {
-  outline: 2px solid var(--blue);
 }
 
 textarea {
